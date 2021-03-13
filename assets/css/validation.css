@@ -1,0 +1,78 @@
+label#email-error {
+    font-size: 16px;
+    color: red;
+}
+label#password-error {
+    font-size: 16px;
+    color: red;
+}
+.l_account_form .form-control{
+    width:100%;
+}
+label#category-error {
+    font-size: 16px;
+    color: red;
+
+}
+label#blog_name-error {
+    font-size: 16px;
+    color: red;
+}
+label#category_name-error {
+    font-size: 16px;
+    color: red;
+    display: inline-block;
+}
+label#desc-error {
+    font-size: 16px;
+    color: red;
+}
+label#client_name-error {
+    font-size: 16px;
+    color: red;
+}
+label#designation-error {
+    font-size: 16px;
+    color: red;
+}
+label#project-error {
+    font-size: 16px;
+    color: red;
+}
+label#title-error {
+    font-size: 16px;
+    color: red;
+}
+label#link-error {
+    font-size: 16px;
+    color: red;
+}
+label#exampleInputEmail-error {
+    font-size: 16px;
+    color: red;
+}
+label#c_password-error{
+    font-size: 16px;
+    color: red;
+    display: contents;
+}
+label#new_password-error {
+    font-size: 16px;
+    color: red;
+}
+label#type-error {
+    font-size: 16px;
+    color: red;
+}
+label#amt-error {
+    font-size: 16px;
+    color: red;
+}
+label#time-error {
+    font-size: 16px;
+    color: red;
+}
+label#old_password-error {
+    font-size: 16px;
+    color: red;
+}

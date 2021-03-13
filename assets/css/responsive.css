@@ -1,0 +1,22 @@
+@media(max-width:991px){
+	.view_page_wrap .left_thumb {
+		width: 150px;
+	}
+	.view_page_wrap .left_thumb img {
+		width: 150px;
+		height: 150px;
+	}
+	.view_page_wrap .right_contents {
+		padding-left: 150px;
+	}
+}
+
+@media(max-width:767px){
+	.view_page_wrap .left_thumb {
+		display:inline-block;
+		float:none;
+	}
+	.view_page_wrap .right_contents {
+		padding-left:0px;
+	}
+}
