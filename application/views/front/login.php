@@ -1,5 +1,5 @@
 <!-- Login section End -->
-<div class="sc_wrapper sc_login_sign_section pad_top_bottom_40"> 
+<div class="sc_wrapper sc_login_sign_section pad_top_bottom_40">
 	<div class="container">
 		<div class="row h_center">
 			<div class="col-lg-6 col-md-12 col-12">
@@ -7,16 +7,16 @@
 					<div class="form_heading">
 						<h1 class="heading">Login to Gigs</h1>
 					</div>
-					<?php if($this->session->flashdata('error')){ ?>
-                        <div class="alert alert-danger" role="alert">
-                        <strong>failed!</strong> Invalid Credentials
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                    <?php } ?>    
+					<?php if ($this->session->flashdata('error')) { ?>
+						<div class="alert alert-danger" role="alert">
+							<strong>failed!</strong> Invalid Credentials
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					<?php } ?>
 					<div class="login_form">
-						<form action="<?=base_url()?>login" method="POST" name="login">
+						<form action="<?= base_url() ?>login" method="POST" name="login">
 							<div class="form_group">
 								<label class="input_label">Email</label>
 								<input type="email" name="email" class="input" placeholder="Enter Your Email">
@@ -51,7 +51,7 @@
 							<!--    </a>-->
 							<!--</div>-->
 							<div class="form_text_group">
-								You Don't have an account please <a href="<?=base_url()?>signup">Register</a> Now
+								You Don't have an account please <a href="<?= base_url() ?>signup">Register</a> Now
 							</div>
 						</form>
 					</div>
