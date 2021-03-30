@@ -30,11 +30,11 @@ class Admin extends CI_Controller
 		if ($this->session->userdata('user_id')) {
 			redirect('admin/dashboard');
 		} else {
-			// if ($_POST) {
+			if ($_POST) {
 			$email = $this->input->post('email');
 			$pass = $this->input->post('password');
-			// $data['check_login'] = $this->Admin_Model->adminLogin($email, $pass);
-			$data['check_login'] = $this->Admin_Model->adminLogin('admin@gmail.com', '123456');
+			$data['check_login'] = $this->Admin_Model->adminLogin($email, $pass);
+			// $data['check_login'] = $this->Admin_Model->adminLogin('admin@gmail.com', '123456');
 			if ($data['check_login'] != false) {
 				$this->session->set_flashdata('success', 'Succefully login.');
 				$this->session->set_userdata(array("name" => $data['check_login']->name, "user_id" => $data['check_login']->id));
@@ -42,7 +42,7 @@ class Admin extends CI_Controller
 			} else {
 				$this->session->set_flashdata('error', 'Invalid Credential.');
 			}
-			// }
+			}
 			$this->load->view('admin/login');
 		}
 	}

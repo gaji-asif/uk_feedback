@@ -54,6 +54,79 @@ class Front extends CI_Controller
 		$this->load->view('front/gigsDetail', $data);
 		$this->load->view('footer');
 	}
+	public function WorkStram($id)
+	{
+		$data['title'] = '';
+		$data['description'] = '';
+		$data['keyword'] = '';
+		$this->load->view('header', $data);
+		$array = array('g_id' => $id);
+		$data['gig_id'] = $id;
+		$array1 = array('buyer_id' => $this->session->userdata('userid'),'gig_id' => $data['gig_id']);
+		$data['links'] = $this->Common_model->fetch_multiple_row_bywhere($array1, 'buyer_links','id', 'ASC');
+		$this->load->view('front/workstream', $data);
+		$this->load->view('footer');
+	}
+	public function addReview()
+	{
+		$data['title'] = '';
+		$data['description'] = '';
+		$data['keyword'] = '';
+	
+		$this->load->view('header', $data);
+		if ($_POST) {
+
+			$data1['link_id'] = $this->input->post('link');
+			$data1['gig_id'] = $this->input->post('gig_id');
+			$data['gig_id'] = $this->input->post('gig_id');
+			$data1['buyer_id'] = $this->session->userdata('userid');
+			$data1['date'] = date('Y-m-d',strtotime('today'));
+			
+			$reveiws = $this->input->post('rating');
+		
+			if(count($reveiws) == 2 && empty($reveiws[1]))
+			{
+				$data1['review_details'] = $reveiws[0];
+				$insert = $this->Common_model->insert_detail($data1, 'buyer_links_reviews');
+			}
+			else{
+				foreach($reveiws as $key=>$review)
+				{
+					if($key == count($reveiws)-1)
+					{
+						break;
+					}
+					$data1['review_details'] = $review;
+					$insert = $this->Common_model->insert_detail($data1, 'buyer_links_reviews');
+				}
+			}	
+		}
+		$this->session->set_flashdata('success2', 'Data addeed successfully.');
+
+		redirect("front/WorkStram/".$data['gig_id']);
+	}
+	public function addLink()
+	{
+		$data['title'] = '';
+		$data['description'] = '';
+		$data['keyword'] = '';
+	
+		$this->load->view('header', $data);
+		if ($_POST) {
+			$data1['link_url'] = $this->input->post('add_link');
+			$data1['gig_id'] = $this->input->post('gig_id');
+			$data['gig_id'] = $this->input->post('gig_id');
+			$data1['buyer_id'] = $this->session->userdata('userid');
+			$data1['date'] = date('Y-m-d',strtotime('today'));
+
+		
+			$insert = $this->Common_model->insert_detail($data1, 'buyer_links');
+			
+		}
+		$this->session->set_flashdata('success', 'Data addeed successfully.');
+
+		redirect("front/WorkStram/".$data['gig_id']);
+	}
 
 	public function login()
 	{
@@ -62,13 +135,13 @@ class Front extends CI_Controller
 		$data['description'] = '';
 		$data['keyword'] = '';
 		$this->load->view('header', $data);
-		//  if($_POST){
+		 if($_POST){
 
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 
-		// $data2['check_login'] = $this->Common_model->userLogin($email, $password);
-		$data2['check_login'] = $this->Common_model->userLogin('asif@gmail.com', '123456');
+		$data2['check_login'] = $this->Common_model->userLogin($email, $password);
+		// $data2['check_login'] = $this->Common_model->userLogin('asif@gmail.com', '123456');
 		if ($data2['check_login'] != false) {
 
 			$this->session->set_userdata(array("username" => $data2['check_login']->name, "userid" => $data2['check_login']->user_id, "useremail" => $data2['check_login']->email, "user_type" => $data2['check_login']->user_type));
@@ -82,7 +155,7 @@ class Front extends CI_Controller
 		} else {
 			$this->session->set_flashdata('error', 'invalid credentials');
 		}
-		//  }
+		 }
 		$this->load->view('front/login', $data);
 		$this->load->view('footer');
 	}

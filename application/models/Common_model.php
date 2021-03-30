@@ -8,7 +8,9 @@ class Common_model extends CI_Model
     //insert data
     function insert_detail($data, $table)
     {
+        
         $insert = $this->db->insert($table, $data);
+      
         if ($insert) {
             return $this->db->insert_id();
         } else {

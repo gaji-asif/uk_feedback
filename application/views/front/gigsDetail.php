@@ -242,6 +242,16 @@
 		<div class="row">
 			<!-- offer Detail column -->
 			<div class="col-lg-8 col-sm-12 col-12">
+			<?php if (!empty($_SESSION['userid']) && $_SESSION['userid'] != '') { ?>
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Offer Details</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<?= base_url() ?>front/WorkStram/<?php echo $gig_id; ?>">Work Stream</a>
+					</li>
+				</ul>
+			<?php } ?>
 				<div class="offer_detail_cover">
 					<div class="offer_item_detail white_box m_b_30">
 
