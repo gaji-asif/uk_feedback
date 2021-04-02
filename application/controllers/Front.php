@@ -67,6 +67,58 @@ class Front extends CI_Controller
 		$this->load->view('front/workstream', $data);
 		$this->load->view('footer');
 	}
+	public function viewWorkStram($id)
+	{
+		$data['title'] = '';
+		$data['description'] = '';
+		$data['keyword'] = '';
+		$this->load->view('header', $data);
+		$array = array('g_id' => $id);
+		$data['gig_id'] = $id;
+		$array1 = array('buyer_id' => $this->session->userdata('userid'),'gig_id' => $data['gig_id']);
+		$data['links'] = $this->Common_model->getReviews($array1['buyer_id'],$array1['gig_id']);
+		$array2 = [];
+		foreach($data['links'] as $key=>$row)
+		{
+			$getData = $this->Common_model->fetch_multiple_row_bywhere(['link_id' => $row['link_id'] ], 'buyer_links_reviews','id', 'ASC');
+			$data['links'][$key]['reviews'] = $getData;
+		}
+
+		$this->load->view('front/viewworkstream', $data);
+		$this->load->view('footer');
+	}
+	public function editReview()
+	{
+		$data['title'] = '';
+		$data['description'] = '';
+		$data['keyword'] = '';
+	
+		$this->load->view('header', $data);
+		if ($_POST) {
+
+			$data1['link'] = $this->input->post('link');
+			$data['gig_id'] = $this->input->post('gig_id');
+			// $data1['link_id'] = $this->input->post('link_id');
+			// $data1['review_id'] = $this->input->post('review_id');
+			// $data1['review'] = $this->input->post('review');
+	
+			// $this->Common_model->print_r2 ($data1['link']);
+
+			foreach($data1['link'] as $row)
+			{
+				$this->Common_model->update_detail('buyer_links',['link_url'=>$row[0][1]],['id' => $row[0][0]]);
+				foreach($row[1] as $row1)
+				{
+					$this->Common_model->update_detail('buyer_links_reviews',['review_details'=>$row1[1]],['id' => $row1[0]]);
+
+				}
+			}
+
+		}
+		$this->session->set_flashdata('success', 'Data Updated successfully.');
+
+		redirect("front/viewWorkStram/".$data['gig_id']);
+	}
 	public function addReview()
 	{
 		$data['title'] = '';

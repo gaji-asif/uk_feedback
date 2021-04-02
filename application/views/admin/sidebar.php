@@ -116,6 +116,12 @@
 			<span>Buyer Messages</span>
 		</a>
 	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<?= base_url('admin/work_stream'); ?>">
+			<i class="far fa-file-alt"></i>
+			<span>Work Streams</span>
+		</a>
+	</li>
 
 	<!--<li class="nav-item">-->
 	<!--	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#new_collapse" aria-expanded="true" aria-controls="new_collapse">-->

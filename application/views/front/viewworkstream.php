@@ -259,18 +259,23 @@
 						<a class="nav-link " href="<?= base_url() ?>front/gigsDetail/<?php echo $gig_id; ?>">Offer Details</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" href="#">Work Stream</a>
+						<a class="nav-link" href="<?= base_url() ?>front/WorkStram/<?php echo $gig_id; ?>">Work Stream</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<?= base_url() ?>front/viewWorkStram/<?php echo $gig_id; ?>">View Work Stream</a>
+						<a class="nav-link active" href="<?= base_url() ?>front/viewWorkStram/<?php echo $gig_id; ?>">View Work Stream</a>
 					</li>
+					
 				</ul>
 				<div class="row">
-					<div class="col-lg-4">
+	
+					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-							<div class="card-title">Add Link</div>
-								<?php if($this->session->flashdata('success')){ ?>
+							
+
+							<?php if(!empty($links)){ ?>
+							<div class="card-title">View Reviews</div>
+							<?php if($this->session->flashdata('success')){ ?>
  									<div class="alert alert-success mb-3 background-success" role="alert">
 									 <?php echo $this->session->flashdata('success'); ?>
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -278,76 +283,36 @@
 										</button>
 									</div>
 									<?php } ?>
-								<form  method="POST" action="<?=base_url()?>front/addLink" enctype="multipart/form-data" name="addLinkForm">
-									<div class="form-group">
-										<label for="exampleInputEmail1">Link</label>
-										<input type="text" name="add_link" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Link" required>
-									</div>
-									<input type="hidden" name="gig_id" value="<?php echo $gig_id; ?>">
-									<div class="text-right">
-										<button type="submit" class="btn btn-primary">Submit</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-8">
-						<div class="card">
-							<div class="card-body">
-							<div class="card-title">Add Review</div>
-							<?php if($this->session->flashdata('success2')){ ?>
- 									<div class="alert alert-success mb-3 background-success" role="alert">
-									 <?php echo $this->session->flashdata('success2'); ?>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<?php } ?>
-								<form  method="POST" action="<?=base_url()?>front/addReview" enctype="multipart/form-data" name="addReviewForm">
+								<form  method="POST" action="<?=base_url()?>front/editReview" enctype="multipart/form-data" name="editReviewForm">
 								<input type="hidden" name="gig_id" value="<?php echo $gig_id; ?>">
-									<div class="form-group">
-										<label for="exampleInput">Link</label>
-										<select class="js-example-basic-single custom-select" id="exampleInput" name="link" required>
-											<option ></option>
-											<?php  
-											if(isset($links) && !empty($links)){
-												foreach($links as $link){ ?>
-												<option value="<?php echo $link->id ?>"><?php echo $link->link_url ?></option>
-												<?php  }
-											} ?>
-										
-										</select>
-									</div>
-							
-
-									<div class="increment">
-										<div class="form-group">
-											<label for="exampleInputEmail1">Review</label>
-											<textarea class="form-control" name="rating[]" aria-label="With textarea" rows="5" required></textarea>
-										</div>       
-                                        <div class="float-right">
-                                            <button class="btn btn-success ml-1 mb-1" type="button"><i class="fa fa-plus"></i></button>
-                                        </div>                                              
-                                    </div>
-                                
-
-									<div class="clone d-none">
-										<div class="hide new" style="padding-top:30px">
+								
+										<?php foreach($links as $key=>$link){ ?>  
+											<input type="hidden" name="link[<?php echo $key ?>][0][0]" value="<?php echo $link['link_id'] ?>">
 											<div class="form-group">
-												<label for="exampleInputEmail1">Review</label>
-												<textarea class="form-control" name="rating[]" rows="5" aria-label="With textarea"></textarea>
-											</div>		
-											<div class="float-right">
-												<button class="btn btn-danger ml-1 mb-1" type="button"><i class="fa fa-times"></i></button>
+												<label for="exampleInputEmail1">Link</label>
+												<input type="text" name="link[<?php echo $key ?>][0][1]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Link" value="<?php echo $link['link_url'] ?>" required>
 											</div>
-										</div>
-									</div>
+											
+											<?php foreach($link['reviews'] as $key2=>$row){ ?>
+												<input type="hidden" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][0]" value="<?php echo $row->id ?>">
+												<div class="form-group">
+													<label for="exampleInputEmail1">Review</label>
+													<textarea class="form-control" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][1]" aria-label="With textarea" rows="5" required><?php echo $row->review_details ?></textarea>
+												</div>       
+											<?php } ?>                                        
+										<?php } ?>                                        
+                                   
 									
 									<div class="text-right">
 										<button type="submit" class="btn btn-primary">Submit</button>
 									</div>
 								</form>
 							</div>
+							<?php } else{?>
+								<div class="alert alert-danger mb-3 background-danger" role="alert">
+									 Please add a review first.
+									</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>

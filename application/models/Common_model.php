@@ -63,7 +63,32 @@ class Common_model extends CI_Model
         $result = $row_details->result();
         return $result;
     }
+   
 
+    public function getReviews($buyer_id,$gig_id)
+    {
+
+        $this->db->select("buyer_links_reviews.*,buyer_links.link_url");
+        $this->db->join("buyer_links", "buyer_links_reviews.link_id=buyer_links.id", "left");
+        $this->db->from('buyer_links_reviews');
+        $this->db->where('buyer_links_reviews.buyer_id', $buyer_id);
+        $this->db->where('buyer_links_reviews.gig_id', $gig_id);
+        $this->db->group_by('buyer_links.link_url');
+        $query = $this->db->get();
+        return $result = $query->result_array();
+    }
+
+    public function getAllReviews()
+    {
+
+        $this->db->select("buyer_links.*,gigs.title,users.name");
+        $this->db->join("gigs", "gigs.g_id=buyer_links.gig_id", "left");
+        $this->db->join("users", "users.user_id =buyer_links.buyer_id", "left");
+        $this->db->from('buyer_links');
+        $this->db->group_by('buyer_links.gig_id,buyer_links.buyer_id');
+        $query = $this->db->get();
+        return $result = $query->result_array();
+    }
     function fetch_multiple_row_asec($array, $table, $order)
     {
         $this->db->order_by($order, 'ASC');
@@ -285,4 +310,9 @@ class Common_model extends CI_Model
         $query = $this->db->get('messages');
         return $query->result_array();
     }
+    function print_r2($val){
+        echo '<pre>';
+        print_r($val);
+        echo  '</pre>';
+    }      
 }
