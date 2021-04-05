@@ -115,7 +115,7 @@ class Front extends CI_Controller
 			}
 
 		}
-		$this->session->set_flashdata('success', 'Data Updated successfully.');
+		$this->session->set_flashdata('success ', 'Data Updated successfully.');
 
 		redirect("front/viewWorkStram/".$data['gig_id']);
 	}
@@ -127,31 +127,44 @@ class Front extends CI_Controller
 	
 		$this->load->view('header', $data);
 		if ($_POST) {
-
+			
 			$data1['link_id'] = $this->input->post('link');
 			$data1['gig_id'] = $this->input->post('gig_id');
 			$data['gig_id'] = $this->input->post('gig_id');
 			$data1['buyer_id'] = $this->session->userdata('userid');
 			$data1['date'] = date('Y-m-d',strtotime('today'));
-			
-			$reveiws = $this->input->post('rating');
+			$array = array('g_id' => $data['gig_id']);
+			$gig = $this->Common_model->fetch_single_row($array, 'gigs');
 		
-			if(count($reveiws) == 2 && empty($reveiws[1]))
-			{
-				$data1['review_details'] = $reveiws[0];
-				$insert = $this->Common_model->insert_detail($data1, 'buyer_links_reviews');
-			}
-			else{
-				foreach($reveiws as $key=>$review)
+			$reveiws = $this->input->post('rating');
+			// var_dump($gig);
+			// echo "<br>";
+			// var_dump(count($reveiws));
+			// exit;
+			if(count($reveiws)-1 <= $gig->no_of_reviews){
+				if(count($reveiws) == 2 && empty($reveiws[1]))
 				{
-					if($key == count($reveiws)-1)
-					{
-						break;
-					}
-					$data1['review_details'] = $review;
+					$data1['review_details'] = $reveiws[0];
 					$insert = $this->Common_model->insert_detail($data1, 'buyer_links_reviews');
 				}
-			}	
+				else{
+					foreach($reveiws as $key=>$review)
+					{
+						if($key == count($reveiws)-1)
+						{
+							break;
+						}
+						$data1['review_details'] = $review;
+						$insert = $this->Common_model->insert_detail($data1, 'buyer_links_reviews');
+					}
+				}	
+			}
+			else{
+				$this->session->set_flashdata('danger2', 'Review Limit Exceeded.');
+
+					redirect("front/WorkStram/".$data['gig_id']);
+			}
+		
 		}
 		$this->session->set_flashdata('success2', 'Data addeed successfully.');
 

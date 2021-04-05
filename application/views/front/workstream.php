@@ -303,6 +303,14 @@
 										</button>
 									</div>
 									<?php } ?>
+							<?php if($this->session->flashdata('danger2')){ ?>
+ 									<div class="alert alert-danger mb-3 background-danger" role="alert">
+									 <?php echo $this->session->flashdata('danger2'); ?>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<?php } ?>
 								<form  method="POST" action="<?=base_url()?>front/addReview" enctype="multipart/form-data" name="addReviewForm">
 								<input type="hidden" name="gig_id" value="<?php echo $gig_id; ?>">
 									<div class="form-group">
