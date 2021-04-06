@@ -135,7 +135,7 @@ class Front extends CI_Controller
 			$data1['date'] = date('Y-m-d',strtotime('today'));
 			$array = array('g_id' => $data['gig_id']);
 			$gig = $this->Common_model->fetch_single_row($array, 'gigs');
-		
+			$data1['gig_cat_id'] = $gig->category_id;
 			$reveiws = $this->input->post('rating');
 			// var_dump($gig);
 			// echo "<br>";
@@ -178,12 +178,17 @@ class Front extends CI_Controller
 	
 		$this->load->view('header', $data);
 		if ($_POST) {
+			$data['gig_id'] = $this->input->post('gig_id');
+			$array = array('g_id' => $data['gig_id']);
+
+			$gig = $this->Common_model->fetch_single_row($array, 'gigs');
+
 			$data1['link_url'] = $this->input->post('add_link');
 			$data1['gig_id'] = $this->input->post('gig_id');
-			$data['gig_id'] = $this->input->post('gig_id');
+			
 			$data1['buyer_id'] = $this->session->userdata('userid');
 			$data1['date'] = date('Y-m-d',strtotime('today'));
-
+			$data1['gig_cat_id'] = $gig->category_id;
 		
 			$insert = $this->Common_model->insert_detail($data1, 'buyer_links');
 			

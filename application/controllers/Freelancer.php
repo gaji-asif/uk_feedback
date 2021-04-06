@@ -20,7 +20,7 @@ class Freelancer extends CI_Controller {
 		
 			$this->controller_method = &get_instance();
 		}
-	public function dashboard()
+	public function dashboard($id='')
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';
@@ -28,23 +28,27 @@ class Freelancer extends CI_Controller {
 	    $this->load->view('header',$data);
 	    $userdetail=$this->Common_model->fetch_userdetail_by_id($this->session->userdata('userid'));
 	    $usercountry=$userdetail->country;
-	    
-	    
-	   $array1=array('review_status'=>0,'cat_id'=>1);
-	   $data['google']=$this->Common_model->fetch_multiple_row_bywheree($array1,'buyer_review_content','id','RANDOM',1);
-	    $array2=array('review_status'=>0,'cat_id'=>2);
-	    $data['app']=$this->Common_model->fetch_multiple_row_bywheree($array2,'buyer_review_content','id','RANDOM',1);
-	    $array3=array('review_status'=>0,'cat_id'=>3);
-	    $data['facebook']=$this->Common_model->fetch_multiple_row_bywheree($array3,'buyer_review_content','id','RANDOM',1);
-	     $array4=array('review_status'=>0,'cat_id'=>4);
-	    $data['trust']=$this->Common_model->fetch_multiple_row_bywheree($array4,'buyer_review_content','id','RANDOM',1);
-	     $array5=array('review_status'=>0,'cat_id'=>5);
-	    $data['yelp']=$this->Common_model->fetch_multiple_row_bywheree($array5,'buyer_review_content','id','RANDOM',1);
-	    $array6=array('review_status'=>0,'cat_id'=>6);
-	    $data['trip']=$this->Common_model->fetch_multiple_row_bywheree($array6,'buyer_review_content','id','RANDOM',1);
-	    $array7=array('review_status'=>0,'cat_id'=>7);
-	    $data['yell']=$this->Common_model->fetch_multiple_row_bywheree($array7,'buyer_review_content','id','RANDOM',1);
+		if(!empty($id))
+		{
+			$data['id'] = $id;
+			$array = array('cat_id' => $id);
+			$data['category'] = $this->Common_model->fetch_single_row($array, 'categories');
+			$data['links'] = $this->Common_model->fetch_cat_wise_links_with_gig($id);
+		}
 	    $this->load->view('freelancer/dashboard',$data);
+		$this->load->view('footer');
+	}
+	public function show_reviews($id,$gig_cat_id)
+	{
+	    $data['title'] = '';
+	    $data['description'] = '';
+	    $data['keyword'] = '';
+	    $this->load->view('header',$data);
+		$data['id'] = $gig_cat_id;
+		$data['reviews'] = $this->Common_model->getReviewsByLink($id);
+		// var_dump($getData);
+		// exit;
+		$this->load->view('freelancer/show-reviews',$data);
 		$this->load->view('footer');
 	}
 	

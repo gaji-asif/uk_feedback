@@ -63,6 +63,18 @@ class Common_model extends CI_Model
         $result = $row_details->result();
         return $result;
     }
+    function fetch_cat_wise_links_with_gig($cat_id)
+    {
+        $this->db->select("buyer_links.*,gigs.title");
+        $this->db->join("gigs", "gigs.g_id=buyer_links.gig_id", "left");
+        $this->db->from('buyer_links');
+        $this->db->where('buyer_links.approve_status', '1');
+        $this->db->where('buyer_links.link_status', '1');
+        $this->db->where('buyer_links.gig_cat_id', $cat_id);
+        $this->db->order_by('id',"DESC");
+        $query = $this->db->get();
+        return $result = $query->result_array();
+    }
    
 
     public function getReviews($buyer_id,$gig_id)
@@ -75,6 +87,18 @@ class Common_model extends CI_Model
         $this->db->where('buyer_links_reviews.gig_id', $gig_id);
         $this->db->group_by('buyer_links.link_url');
         $query = $this->db->get();
+        return $result = $query->result_array();
+    }
+    public function getReviewsByLink($id)
+    {
+        $this->db->select("buyer_links_reviews.*,buyer_links.link_url");
+        $this->db->join("gigs", "buyer_links_reviews.gig_id=gigs.g_id", "left");
+        $this->db->join("buyer_links", "buyer_links_reviews.link_id=buyer_links.id", "left");
+        $this->db->from('buyer_links_reviews');
+        $this->db->where('buyer_links_reviews.link_id', $id);
+        $this->db->order_by('id',"DESC");
+        $query = $this->db->get();
+
         return $result = $query->result_array();
     }
 
