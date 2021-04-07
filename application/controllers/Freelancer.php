@@ -25,6 +25,7 @@ class Freelancer extends CI_Controller {
 	    $data['title'] = '';
 	    $data['description'] = '';
 	    $data['keyword'] = '';
+	    $data['user_id'] = $this->session->userdata('userid');;
 	    $this->load->view('header',$data);
 	    $userdetail=$this->Common_model->fetch_userdetail_by_id($this->session->userdata('userid'));
 	    $usercountry=$userdetail->country;
@@ -33,7 +34,38 @@ class Freelancer extends CI_Controller {
 			$data['id'] = $id;
 			$array = array('cat_id' => $id);
 			$data['category'] = $this->Common_model->fetch_single_row($array, 'categories');
-			$data['links'] = $this->Common_model->fetch_cat_wise_links_with_gig($id);
+			$links = $this->Common_model->fetch_cat_wise_links_with_gig($id);
+		
+			$data['links'] = [];
+			foreach($links as $row1)
+			{
+				$array3=array('link_id'=>$row1['id'] ,'gig_id'=>$row1['gig_id'] ,'buyer_id'=>$row1['buyer_id'] ,'gig_cat_id'=>$row1['gig_cat_id']);
+				$reviews = $this->Common_model->fetch_multiple_row_bywhere($array3,'buyer_links_reviews','id','ASC');
+
+				$flag = 1;
+				foreach($reviews as $reveiew)
+				{
+					if($flag == 1)
+					{
+						$array1 = ['review_id' => $reveiew->id,'gig_cat_id' => $id,'freelancer_id'=>$this->session->userdata('userid')];
+						$complete_review = $this->Common_model->fetch_single_row($array1, 'completed_reviews');
+						if(!empty($complete_review)){
+						
+							$row1['done'] = 1;
+							$flag = 0;
+							break;
+						}
+						else
+						{
+							$row1['done'] = 0;
+						}
+					}
+				}
+			
+				 array_push($data['links'],$row1);
+			}
+		//  $this->Common_model->print_r2($data['links']);
+		// 	exit;
 		}
 	    $this->load->view('freelancer/dashboard',$data);
 		$this->load->view('footer');
@@ -52,6 +84,64 @@ class Freelancer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function submit_review()
+	{
+		
+		if($_POST){
+			$data1['review_id'] = $this->input->post('review_id');
+			$array=array('id'=>$data1['review_id']);
+			$reveiew =$this->Common_model->fetch_single_row($array,'buyer_links_reviews');
+		
+			if($reveiew->reveiw_status == 1)
+			{
+				$id = $this->input->post('id');
+				$data1['link_id'] = $this->input->post('link_id');
+				$data1['gig_id'] = $this->input->post('gig_id');
+				$data1['buyer_id'] = $this->input->post('buyer_id');
+				$data1['gig_cat_id'] = $this->input->post('gig_cat_id');
+				$data1['reviewer_name'] = $this->input->post('reviewer_name');
+				$data1['review_id'] = $this->input->post('review_id');
+				$data1['freelancer_id'] = $this->session->userdata('userid');
+				$data1['created_date'] = date('Y-m-d');;
+				if($_FILES['screenshot']['name']!=""){
+					$target1 = "uploads/review_screenshot/".time()."_".basename($_FILES['screenshot']['name']);
+					move_uploaded_file($_FILES['screenshot']['tmp_name'], $target1);
+					$data1['screenshot']= $target1;
+				}else{
+					$data1['screenshot']="";   
+				}
+				$insert = $this->Common_model->insert_detail($data1, 'completed_reviews');
+				
+				$data2['reveiw_status'] = 0;
+				$where=array('id'=>$data1['review_id']);
+				$this->Common_model->update_detail('buyer_links_reviews',$data2,$where); 
+
+				$array3=array('link_id'=>$data1['link_id'] ,'gig_id'=>$data1['gig_id'] ,'buyer_id'=>$data1['buyer_id'] ,'gig_cat_id'=>$data1['gig_cat_id']);
+				$all_reviews = $this->Common_model->fetch_multiple_row_bywhere($array3,'buyer_links_reviews','id','ASC');
+
+				$array4=array('link_id'=>$data1['link_id'] ,'gig_id'=>$data1['gig_id'] ,'buyer_id'=>$data1['buyer_id'] ,'gig_cat_id'=>$data1['gig_cat_id'],'reveiw_status'=>0);
+				$complete_reviews = $this->Common_model->fetch_multiple_row_bywhere($array4,'buyer_links_reviews','id','ASC');
+
+				
+				if(count($all_reviews) == count($complete_reviews))
+				{
+					$data4['link_status'] = 0;
+					$where=array('id'=>$data1['link_id']);
+					$this->Common_model->update_detail('buyer_links',$data4,$where); 
+				}
+				if($insert){
+				    $this->session->set_flashdata('success','Complete Review successfully.');
+					return redirect('freelancer/dashboard/'.$data1['gig_cat_id']);
+				}else{
+				   $this->session->set_flashdata('error','Something went wrong.');
+				}
+			}
+			$this->session->set_flashdata('danger','This Review already Completed.');
+			return redirect('freelancer/dashboard/'.$data1['gig_cat_id']);
+   
+           
+        }
+	}
 		public function dashboard_demo()
 	{
 	    $data['title'] = '';

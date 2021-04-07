@@ -218,13 +218,16 @@
 		height: 516px;
 		overflow-y: auto;
 	}
+
 	.nav-tabs {
-    	border-bottom: 1px solid  var(--gray_bg);
+		border-bottom: 1px solid var(--gray_bg);
 	}
-	.card{
-		border: 1px solid  #ffffff;
+
+	.card {
+		border: 1px solid #ffffff;
 	}
-	.danger-buttons{
+
+	.danger-buttons {
 		margin-top: 75px;
 	}
 </style>
@@ -264,55 +267,72 @@
 					<li class="nav-item">
 						<a class="nav-link active" href="<?= base_url() ?>front/viewWorkStram/<?php echo $gig_id; ?>">View Work Stream</a>
 					</li>
-					
+
 				</ul>
 				<div class="row">
-	
+
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-							
 
-							<?php if(!empty($links)){ ?>
-							<div class="card-title">View Reviews</div>
-							<?php if($this->session->flashdata('success')){ ?>
- 									<div class="alert alert-success mb-3 background-success" role="alert">
-									 <?php echo $this->session->flashdata('success'); ?>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
+
+								<?php if (!empty($links)) { ?>
+									<div class="card-title">View Reviews</div>
+									<?php if ($this->session->flashdata('success')) { ?>
+										<div class="alert alert-success mb-3 background-success" role="alert">
+											<?php echo $this->session->flashdata('success'); ?>
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
 									<?php } ?>
-								<form  method="POST" action="<?=base_url()?>front/editReview" enctype="multipart/form-data" name="editReviewForm">
-								<input type="hidden" name="gig_id" value="<?php echo $gig_id; ?>">
-								
-										<?php foreach($links as $key=>$link){ ?>  
+									<form method="POST" action="<?= base_url() ?>front/editReview" enctype="multipart/form-data" name="editReviewForm">
+										<input type="hidden" name="gig_id" value="<?php echo $gig_id; ?>">
+
+										<?php foreach ($links as $key => $link) { ?>
 											<input type="hidden" name="link[<?php echo $key ?>][0][0]" value="<?php echo $link['link_id'] ?>">
 											<div class="form-group">
 												<label for="exampleInputEmail1">Link</label>
 												<input type="text" name="link[<?php echo $key ?>][0][1]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Link" value="<?php echo $link['link_url'] ?>" required>
 											</div>
-											
-											<?php foreach($link['reviews'] as $key2=>$row){ ?>
-												<input type="hidden" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][0]" value="<?php echo $row->id ?>">
-												<div class="form-group">
-													<label for="exampleInputEmail1">Review</label>
-													<textarea class="form-control" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][1]" aria-label="With textarea" rows="5" required><?php echo $row->review_details ?></textarea>
-												</div>       
-											<?php } ?>                                        
-										<?php } ?>                                        
-                                   
-									
-									<div class="text-right">
-										<button type="submit" class="btn btn-primary">Submit</button>
-									</div>
-								</form>
+
+											<?php foreach ($link['reviews'] as $key2 => $row) { ?>
+												<div class="row">
+													<div class="col-lg-8">
+														<input type="hidden" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][0]" value="<?php echo $row['id'] ?>">
+														<div class="form-group">
+															<label for="exampleInputEmail1">Reviewer</label>
+															<textarea class="form-control" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][1]" aria-label="With textarea" rows="5" required><?php echo $row['review_details'] ?></textarea>
+														</div>
+													</div>
+													<div class="col-lg-4">
+													<?php if(isset($row['reviewer_name'])){ ?>
+														<div class="form-group">
+															<label for="exampleInputEmail1">Reviewer Name</label>
+															<input type="text"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  value="<?php echo $row['reviewer_name'];  ?>">
+														</div>
+													<?php } ?>
+													<?php if(isset($row['screenshot'])){ ?>
+														<img src="<?= base_url() ?><?php echo $row['screenshot']; ?>" alt="">
+													<?php } ?> 
+													</div>
+												
+												</div>
+												<hr>
+											<?php } ?>
+										<?php } ?>
+
+
+										<div class="text-right">
+											<button type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</form>
 							</div>
-							<?php } else{?>
-								<div class="alert alert-danger mb-3 background-danger" role="alert">
-									 Please add a review first.
-									</div>
-							<?php } ?>
+						<?php } else { ?>
+							<div class="alert alert-danger mb-3 background-danger" role="alert">
+								Please add a review first.
+							</div>
+						<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -320,7 +340,7 @@
 
 			<!-- offer Detail column -->
 			<!-- offer sidebar column -->
-			
+
 			<!-- offer sidebar column -->
 		</div>
 	</div>
@@ -330,21 +350,21 @@
 	$(document).ready(function() {
 		$('.js-example-basic-single').select2({
 			placeholder: "Select a Link",
-    		allowClear: true
+			allowClear: true
 		});
 	});
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $(".btn-success").click(function(){ 
-          var html = $(".clone").html();
-          $(".increment").after(html);
-      });
- 
-      $("body").on("click",".btn-danger",function(){ 
-        $(this).parents(".new").remove();
-      });
-  
-    });
+	$(document).ready(function() {
+		$(".btn-success").click(function() {
+			var html = $(".clone").html();
+			$(".increment").after(html);
+		});
+
+		$("body").on("click", ".btn-danger", function() {
+			$(this).parents(".new").remove();
+		});
+
+	});
 </script>
 <!-- offer Detail wrapper End -->

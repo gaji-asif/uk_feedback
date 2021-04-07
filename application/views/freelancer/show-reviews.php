@@ -111,6 +111,22 @@
 									<!-- card header End -->
 									<!-- card body start -->
 									<div class="card-body">
+										<?php if($this->session->flashdata('danger')){ ?>
+											<div class="alert alert-danger mb-3 background-danger" role="alert">
+											<?php echo $this->session->flashdata('danger'); ?>
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+										<?php } ?>
+										<?php if($this->session->flashdata('success')){ ?>
+											<div class="alert alert-success mb-3 background-success" role="alert">
+											<?php echo $this->session->flashdata('success'); ?>
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+										<?php } ?>
 										<div class="table-responsive">
 											<table class="table dataTable" width="100%" cellspacing="0">
 												<thead>
@@ -137,45 +153,53 @@
 																<!-- Modal -->
 																<div class="modal fade" id="exampleModal<?php echo $review['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 																	<div class="modal-dialog" role="document">
-																		<div class="modal-content">
-																			<div class="modal-header">
-																				<h5 class="modal-title" id="exampleModalLabel">Complete</h5>
-																				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																					<span aria-hidden="true">&times;</span>
-																				</button>
-																			</div>
-																			<div class="modal-body">
-																				<div class="form_group pb-1">
-																					<label class="form_label">Link:</label><br>
-																					<a href="<?php echo $review['link_url']; ?>"><strong><?php echo $review['link_url']; ?></strong></a>
-																					
-																					<!-- <div class="input_group">
-																						<input type="text" class="form-control" value="" >
-																					</div> -->
+																		<form action="<?=base_url()?>freelancer/submit_review" method="POST" enctype="multipart/form-data">
+																			<div class="modal-content">
+																				<div class="modal-header">
+																					<h5 class="modal-title" id="exampleModalLabel">Complete</h5>
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
 																				</div>
-																				<div class="form_group pb-1">
-																					<label class="form_label">Review:</label><br>
-																					<label class="form_label"><strong><?php echo $review['review_details']; ?></strong></label>
-																			
-																				</div>
-																				<div class="form_group pb-1">
-																					<label class="form_label">Reviewer Name</label>
-																					<div class="input_group">
-																						<input type="text" class="form-control"  >
+																				<div class="modal-body">
+																					<div class="form_group pb-1">
+																						<label class="form_label">Link:</label><br>
+																						<a href="<?php echo $review['link_url']; ?>"><strong><?php echo $review['link_url']; ?></strong></a>
+																						
+																						<!-- <div class="input_group">
+																							<input type="text" class="form-control" value="" >
+																						</div> -->
 																					</div>
-																				</div>
-																				<div class="form_group pb-1">
-																					<label class="form_label">Screenshot</label>
-																					<div class="input_group">
-																						<input type="file" class="form-control"  >
+																					<div class="form_group pb-1">
+																						<label class="form_label">Review:</label><br>
+																						<label class="form_label"><strong><?php echo $review['review_details']; ?></strong></label>
+																				
 																					</div>
+																					<div class="form_group pb-1">
+																						<label class="form_label">Reviewer Name</label>
+																						<div class="input_group">
+																							<input type="text" class="form-control" name="reviewer_name" required >
+																						</div>
+																					</div>
+																					<div class="form_group pb-1">
+																						<label class="form_label">Screenshot</label>
+																						<div class="input_group">
+																							<input type="file" class="form-control" name="screenshot" required >
+																						</div>
+																					</div>
+																					<input type="hidden" name="link_id" value="<?php echo $review['link_id'] ?>">
+																					<input type="hidden" name="gig_id" value="<?php echo $review['gig_id'] ?>">
+																					<input type="hidden" name="gig_cat_id" value="<?php echo $review['gig_cat_id'] ?>">
+																					<input type="hidden" name="buyer_id" value="<?php echo $review['buyer_id'] ?>">
+																					<input type="hidden" name="review_id" value="<?php echo $review['id'] ?>">
+																					<input type="hidden" name="id" value="<?php echo $id ?>">
+																				</div>
+																				<div class="modal-footer">
+																					<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+																					<button type="submit" class="admin_btn">Complete</button>
 																				</div>
 																			</div>
-																			<div class="modal-footer">
-																				<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-																				<button type="submit" class="admin_btn">Complete</button>
-																			</div>
-																		</div>
+																		</form>
 																	</div>
 																</div>
 															</td>

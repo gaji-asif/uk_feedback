@@ -71,7 +71,14 @@
 			<div class="dash_content_cover pb-5">
 				<div class="dash_content_area">
 				<?php include 'tabs-menu.php';?>
-
+				<?php if($this->session->flashdata('success')){ ?>
+											<div class="alert alert-success mb-3 background-success" role="alert">
+											<?php echo $this->session->flashdata('success'); ?>
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+										<?php } ?>
 
 					<?php if (isset($id)) { ?>
 						<?php if (isset($links)) { ?>
@@ -102,7 +109,11 @@
 												</thead>
 												<tbody>
 													<?php $i = 1;
-													foreach ($links as $link) { ?>
+													foreach ($links as $link) { 
+													
+														if($link['done'] == 0){
+											
+														?>
 														<tr>
 															<td><?= $i++; ?></td>
 															<td><?php echo $link['title']; ?></td>
@@ -112,7 +123,7 @@
 																<a href="<?php echo base_url(); ?>freelancer/show_reviews/<?php echo $link['id'] ?>/<?php echo $link['gig_cat_id'] ?>" class="card_body  a_icons"><i class="fa fa-eye"></i></a>
 															</td>
 														</tr>
-													<?php } ?>
+													<?php } }?>
 												</tbody>
 											</table>
 										</div>

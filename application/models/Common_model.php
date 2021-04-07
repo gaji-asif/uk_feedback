@@ -63,6 +63,16 @@ class Common_model extends CI_Model
         $result = $row_details->result();
         return $result;
     }
+    function fetch_multiple_row_bywhere_with_complete_review($link_id)
+    {
+        $this->db->select("buyer_links_reviews.*,completed_reviews.reviewer_name,completed_reviews.screenshot");
+        $this->db->join("completed_reviews", "buyer_links_reviews.id=completed_reviews.review_id", "left");
+        $this->db->from('buyer_links_reviews');
+        $this->db->where('buyer_links_reviews.link_id', $link_id);
+        $this->db->order_by('id',"DESC");
+        $query = $this->db->get();
+        return $result = $query->result_array();
+    }
     function fetch_cat_wise_links_with_gig($cat_id)
     {
         $this->db->select("buyer_links.*,gigs.title");
@@ -79,9 +89,9 @@ class Common_model extends CI_Model
 
     public function getReviews($buyer_id,$gig_id)
     {
-
-        $this->db->select("buyer_links_reviews.*,buyer_links.link_url");
+        $this->db->select("buyer_links_reviews.*,buyer_links.link_url,completed_reviews.screenshot,completed_reviews.reviewer_name");
         $this->db->join("buyer_links", "buyer_links_reviews.link_id=buyer_links.id", "left");
+        $this->db->join("completed_reviews", "buyer_links_reviews.id=completed_reviews.review_id", "left");
         $this->db->from('buyer_links_reviews');
         $this->db->where('buyer_links_reviews.buyer_id', $buyer_id);
         $this->db->where('buyer_links_reviews.gig_id', $gig_id);
@@ -96,6 +106,7 @@ class Common_model extends CI_Model
         $this->db->join("buyer_links", "buyer_links_reviews.link_id=buyer_links.id", "left");
         $this->db->from('buyer_links_reviews');
         $this->db->where('buyer_links_reviews.link_id', $id);
+        $this->db->where('buyer_links_reviews.reveiw_status',1);
         $this->db->order_by('id',"DESC");
         $query = $this->db->get();
 

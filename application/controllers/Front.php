@@ -77,13 +77,15 @@ class Front extends CI_Controller
 		$data['gig_id'] = $id;
 		$array1 = array('buyer_id' => $this->session->userdata('userid'),'gig_id' => $data['gig_id']);
 		$data['links'] = $this->Common_model->getReviews($array1['buyer_id'],$array1['gig_id']);
+	
 		$array2 = [];
 		foreach($data['links'] as $key=>$row)
 		{
-			$getData = $this->Common_model->fetch_multiple_row_bywhere(['link_id' => $row['link_id'] ], 'buyer_links_reviews','id', 'ASC');
+			$getData = $this->Common_model->fetch_multiple_row_bywhere_with_complete_review($row['link_id']);
 			$data['links'][$key]['reviews'] = $getData;
 		}
-
+		// $this->Common_model->print_r2($data['links']);
+		// exit;
 		$this->load->view('front/viewworkstream', $data);
 		$this->load->view('footer');
 	}
