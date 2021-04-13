@@ -380,6 +380,7 @@ class Admin extends CI_Controller
 
 				$data1['title'] = $this->input->post('title');
 				$data1['price'] = $this->input->post('price');
+				$data1['freelancer_price'] = $this->input->post('freelancer_price');
 				$data1['category_id'] = $this->input->post('category_id');
 				// $data1['subcat_id'] = $this->input->post('subcat_id');
 				$data1['delivery_days'] = $this->input->post('delivery_days');
@@ -493,6 +494,7 @@ class Admin extends CI_Controller
 				$data1['title'] = $this->input->post('title');
 				$data1['type'] = $this->input->post('type');
 				$data1['price'] = $this->input->post('price');
+				$data1['freelancer_price'] = $this->input->post('freelancer_price');
 				$data1['category_id'] = $this->input->post('category_id');
 				// $data1['subcat_id'] = $this->input->post('subcat_id');
 				$data1['delivery_days'] = $this->input->post('delivery_days');

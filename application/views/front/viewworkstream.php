@@ -230,6 +230,49 @@
 	.danger-buttons {
 		margin-top: 75px;
 	}
+	.action_btn .a_icons {
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		line-height: 23px;
+		border: 1px solid #999;
+		color: #999;
+		border-radius: 3px;
+		text-align: center;
+		text-decoration: none;
+		font-size: 13px;
+	}
+
+	.action_btn .a_icons:hover {
+		border-color: #f5a91f;
+		background-color: #f5a91f;
+		color: #ffffff;
+	}
+
+	.admin_btn {
+		color: #fff;
+		background-color: #f5a91f;
+		height: 40px;
+		line-height: 40px;
+		display: inline-block;
+		padding: 0 20px;
+		font-size: 14px;
+		border-radius: 5px;
+		text-decoration: none;
+		border: none;
+		text-align: center;
+	}
+
+	.admin_btn:hover {
+		color: #fff;
+		background-color: #222222;
+		text-decoration: none;
+	}
+	.custom_btn{
+		margin-top: 31px;
+		margin-left: -21px;
+		padding: 0px 11px;
+	}
 </style>
 <div class="sc_wrapper page_banner_section">
 	<div class="container">
@@ -306,17 +349,48 @@
 														</div>
 													</div>
 													<div class="col-lg-4">
-													<?php if(isset($row['reviewer_name'])){ ?>
-														<div class="form-group">
-															<label for="exampleInputEmail1">Reviewer Name</label>
-															<input type="text"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  value="<?php echo $row['reviewer_name'];  ?>">
+													<div class="row">
+														<div class="col-lg-10">
+															<?php if (isset($row['reviewer_name'])) { ?>
+																<div class="form-group">
+																	<label for="exampleInputEmail1">Reviewer Email</label>
+																	<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $row['reviewer_name'];  ?>">
+																</div>
+															<?php } ?>
 														</div>
-													<?php } ?>
-													<?php if(isset($row['screenshot'])){ ?>
-														<img src="<?= base_url() ?><?php echo $row['screenshot']; ?>" alt="">
-													<?php } ?> 
+														<div class="col-lg-2">
+														<a type="button" class="admin_btn custom_btn" data-toggle="modal" data-target="#exampleModal<?php echo $row['id']; ?>"><i class="fa fa-reply"></i></a>
+														</div>
 													</div>
-												
+													
+														<?php if (isset($row['screenshot'])) { ?>
+															<img src="<?= base_url() ?><?php echo $row['screenshot']; ?>" alt="">
+														<?php } ?>
+														
+
+														<!-- Modal -->
+														<div class="modal fade" id="exampleModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+															<div class="modal-dialog" role="document">
+															
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title" id="exampleModalLabel">Approve Review</h5>
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+																		<div class="modal-body">
+																			<p>Do You want to approve this review?</p>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+																			<a href="<?= base_url() ?>front/approve_review/<?php echo $row['id']; ?>/<?php echo $gig_id; ?>"><button type="button" class="admin_btn">Yes</button></a>
+																		</div>
+																	</div>
+															</div>
+														</div>
+													</div>
+
 												</div>
 												<hr>
 											<?php } ?>

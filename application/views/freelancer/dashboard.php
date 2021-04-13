@@ -101,7 +101,7 @@
 												<thead>
 													<tr>
 														<th>SL</th>
-														<th>Gig Name</th>
+														<!-- <th>Gig Name</th> -->
 														<th>Link</th>
 														<th width="12%" >Date</th>
 														<th>Action</th>
@@ -116,7 +116,7 @@
 														?>
 														<tr>
 															<td><?= $i++; ?></td>
-															<td><?php echo $link['title']; ?></td>
+														
 															<td><?php echo $link['link_url']; ?></td>
 															<td><?php echo $this->Common_model->convert_date('d-m-y', $link['date']);; ?></td>
 															<td class="action_btn">

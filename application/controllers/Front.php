@@ -67,6 +67,18 @@ class Front extends CI_Controller
 		$this->load->view('front/workstream', $data);
 		$this->load->view('footer');
 	}
+	public function approve_review($id,$gig_id)
+	{
+		$data['title'] = '';
+		$data['description'] = '';
+		$data['keyword'] = '';
+		$this->load->view('header', $data);
+		$data['gig_id'] = $gig_id;
+		$array1 = array('id' => $id);
+		$this->Common_model->update_detail('completed_reviews',['review_approve_status'=>1],$array1);
+		$this->load->view('front/workstream', $data);
+		$this->load->view('footer');
+	}
 	public function viewWorkStram($id)
 	{
 		$data['title'] = '';
@@ -84,6 +96,7 @@ class Front extends CI_Controller
 			$getData = $this->Common_model->fetch_multiple_row_bywhere_with_complete_review($row['link_id']);
 			$data['links'][$key]['reviews'] = $getData;
 		}
+
 		// $this->Common_model->print_r2($data['links']);
 		// exit;
 		$this->load->view('front/viewworkstream', $data);
