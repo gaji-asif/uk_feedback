@@ -67,17 +67,30 @@ class Front extends CI_Controller
 		$this->load->view('front/workstream', $data);
 		$this->load->view('footer');
 	}
-	public function approve_review($id,$gig_id)
+	public function approve_review($id,$gig_id,$link_id,$freelancer_id)
 	{
 		$data['title'] = '';
 		$data['description'] = '';
 		$data['keyword'] = '';
 		$this->load->view('header', $data);
 		$data['gig_id'] = $gig_id;
+
+		$array = array('g_id' => $data['gig_id']);
+		$gig = $this->Common_model->fetch_single_row($array, 'gigs');
+	
 		$array1 = array('id' => $id);
 		$this->Common_model->update_detail('completed_reviews',['review_approve_status'=>1],$array1);
-		$this->load->view('front/workstream', $data);
-		$this->load->view('footer');
+		
+		$data3['link_id'] = $link_id;
+		$data3['freelancer_id'] = $freelancer_id;
+		$data3['gig_id'] = $data['gig_id'];
+		$data3['price'] = $gig->freelancer_price;
+		$data3['date'] =  date('Y-m-d');
+		$insert = $this->Common_model->insert_detail($data3, 'freelancer_payments');
+		
+		$this->session->set_flashdata('success-'.$id, 'This Reveiw successfully approved.');
+
+		redirect("front/viewWorkStram/".$data['gig_id']);
 	}
 	public function viewWorkStram($id)
 	{
@@ -86,7 +99,7 @@ class Front extends CI_Controller
 		$data['keyword'] = '';
 		$this->load->view('header', $data);
 		$array = array('g_id' => $id);
-		$data['gig_id'] = $id;
+		$data['gig_id'] = $id; 
 		$array1 = array('buyer_id' => $this->session->userdata('userid'),'gig_id' => $data['gig_id']);
 		$data['links'] = $this->Common_model->getReviews($array1['buyer_id'],$array1['gig_id']);
 	
@@ -95,10 +108,14 @@ class Front extends CI_Controller
 		{
 			$getData = $this->Common_model->fetch_multiple_row_bywhere_with_complete_review($row['link_id']);
 			$data['links'][$key]['reviews'] = $getData;
+		// 	$this->Common_model->print_r2($data['links'][$key]['reviews']);
+		// exit;
+
 		}
 
 		// $this->Common_model->print_r2($data['links']);
 		// exit;
+		
 		$this->load->view('front/viewworkstream', $data);
 		$this->load->view('footer');
 	}

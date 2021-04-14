@@ -176,9 +176,9 @@
 																				
 																					</div>
 																					<div class="form_group pb-1">
-																						<label class="form_label">Reviewer Name</label>
+																						<label class="form_label">Reviewer Email</label>
 																						<div class="input_group">
-																							<input type="text" class="form-control" name="reviewer_name" required >
+																							<input type="email" class="form-control" name="reviewer_name" required >
 																						</div>
 																					</div>
 																					<div class="form_group pb-1">
@@ -204,7 +204,10 @@
 																</div>
 															</td>
 														</tr>
-													<?php } ?>
+														
+													<?php
+												break;
+												} ?>
 												</tbody>
 											</table>
 										</div>

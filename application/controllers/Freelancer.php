@@ -37,12 +37,14 @@ class Freelancer extends CI_Controller {
 			$links = $this->Common_model->fetch_cat_wise_links_with_gig($id);
 		
 			$data['links'] = [];
+	
 			foreach($links as $row1)
 			{
 				$array3=array('link_id'=>$row1['id'] ,'gig_id'=>$row1['gig_id'] ,'buyer_id'=>$row1['buyer_id'] ,'gig_cat_id'=>$row1['gig_cat_id']);
 				$reviews = $this->Common_model->fetch_multiple_row_bywhere($array3,'buyer_links_reviews','id','ASC');
 
 				$flag = 1;
+			
 				foreach($reviews as $reveiew)
 				{
 					if($flag == 1)
@@ -78,7 +80,7 @@ class Freelancer extends CI_Controller {
 	    $this->load->view('header',$data);
 		$data['id'] = $gig_cat_id;
 		$data['reviews'] = $this->Common_model->getReviewsByLink($id);
-		// var_dump($getData);
+		// $this->Common_model->print_r2($data['reviews']);
 		// exit;
 		$this->load->view('freelancer/show-reviews',$data);
 		$this->load->view('footer');
@@ -231,7 +233,8 @@ class Freelancer extends CI_Controller {
 	    $this->load->view('freelancer/profile',$data);
 		$this->load->view('footer');
 	}
-		public function myReferrals()
+	
+	public function myReferrals()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';
@@ -248,12 +251,23 @@ class Freelancer extends CI_Controller {
 	    $data['keyword'] = '';
 	    $this->load->view('header',$data);
 	    $array=array('user_id'=>$this->session->userdata('userid'));
-	    $data['payment']=$this->Common_model->fetch_multiple_row_bywhere($array,'payment_request','id','DESC');
+	    // $data['payment']=$this->Common_model->fetch_multiple_row_bywhere($array,'payment_request','id','DESC');
+	    $data['payment']=$this->Common_model->payment_with_link_join($this->session->userdata('userid'));
+		// $this->Common_model->print_r2($data['payment']);
+		// exit;
+		$totalAmount = 0; 
+		foreach($data['payment'] as $payment)
+		{
+			$totalAmount += $payment['price'];
+		}
+		$data['totalAmount'] = $totalAmount;
+		// 	$this->Common_model->print_r2($totalAmount);
+		// exit;
 	    $this->load->view('freelancer/myPayments',$data);
 		$this->load->view('footer');
 	}	
 	
-		public function withdrawal()
+	public function withdrawal()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';
@@ -418,5 +432,32 @@ class Freelancer extends CI_Controller {
           }
 	    $this->load->view('freelancer/changePassword',$data);
 		$this->load->view('footer');
+	}
+
+	public function withdraw_money(){
+		$data['title'] = '';
+	    $data['description'] = '';
+	    $data['keyword'] = '';
+	    $this->load->view('header',$data);
+	    if($_POST){
+	         
+                $data1['freelancer_id'] = $this->session->userdata('userid');
+                $data1['available_amount'] = $this->input->post('available_amount');             
+                $data1['request_amount'] = $this->input->post('request_amount');
+                // $data1['user_type'] = 1;
+                $data1['date'] = date('Y-m-d');
+              
+                $insert = $this->Common_model->insert_detail($data1,'withdrawn_requests');
+	            if($insert){
+	               $this->session->set_flashdata('success','sucessfully inserted');
+	               
+	                
+	            }else{
+	               $this->session->set_flashdata('error','Something went wrong.');
+	               
+	            }
+	     }
+	    return redirect('freelancer/my-payments');
+		// $this->load->view('footer');
 	}
 }

@@ -339,60 +339,72 @@
 												<input type="text" name="link[<?php echo $key ?>][0][1]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Link" value="<?php echo $link['link_url'] ?>" required>
 											</div>
 
-											<?php foreach ($link['reviews'] as $key2 => $row) { ?>
-												<div class="row">
-													<div class="col-lg-8">
-														<input type="hidden" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][0]" value="<?php echo $row['id'] ?>">
-														<div class="form-group">
-															<label for="exampleInputEmail1">Reviewer</label>
-															<textarea class="form-control" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][1]" aria-label="With textarea" rows="5" required><?php echo $row['review_details'] ?></textarea>
+											<?php if(isset($link['reviews'])){?>
+												<?php foreach ($link['reviews'] as $key2 => $row) { ?>
+													<?php if ($this->session->flashdata('success-'.$row['completed_reviews_id'])) { ?>
+														<div class="alert alert-success mb-3 background-success" role="alert">
+															<?php echo $this->session->flashdata('success-'.$row['completed_reviews_id']); ?>
+															<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
 														</div>
-													</div>
-													<div class="col-lg-4">
+													<?php } ?>
 													<div class="row">
-														<div class="col-lg-10">
-															<?php if (isset($row['reviewer_name'])) { ?>
-																<div class="form-group">
-																	<label for="exampleInputEmail1">Reviewer Email</label>
-																	<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $row['reviewer_name'];  ?>">
+														<div class="col-lg-8">
+															<input type="hidden" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][0]" value="<?php echo $row['id'] ?>">
+															<div class="form-group">
+																<label for="exampleInputEmail1">Reviewer</label>
+																<textarea class="form-control" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][1]" aria-label="With textarea" rows="5" required><?php echo $row['review_details'] ?></textarea>
+															</div>
+														</div>
+														<div class="col-lg-4">
+														<div class="row">
+															<div class="col-lg-10 col-sm-10">
+																<?php if (isset($row['reviewer_name'])) { ?>
+																	<div class="form-group">
+																		<label for="exampleInputEmail1">Reviewer Email</label>
+																		<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $row['reviewer_name'];  ?>">
+																	</div>
+																<?php } ?>
+															</div>
+															<?php if (isset($row['review_approve_status']) && $row['review_approve_status'] == 0) { ?>
+																<div class="col-lg-2 col-sm-2">
+																	<a type="button" class="admin_btn custom_btn" data-toggle="modal" data-target="#exampleModal<?php echo $row['id']; ?>"><i class="fa fa-reply"></i></a>
 																</div>
 															<?php } ?>
 														</div>
-														<div class="col-lg-2">
-														<a type="button" class="admin_btn custom_btn" data-toggle="modal" data-target="#exampleModal<?php echo $row['id']; ?>"><i class="fa fa-reply"></i></a>
-														</div>
-													</div>
-													
-														<?php if (isset($row['screenshot'])) { ?>
-															<img src="<?= base_url() ?><?php echo $row['screenshot']; ?>" alt="">
-														<?php } ?>
 														
-
-														<!-- Modal -->
-														<div class="modal fade" id="exampleModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-															<div class="modal-dialog" role="document">
+															<?php if (isset($row['screenshot']) ) { ?>
+																<img src="<?= base_url() ?><?php echo $row['screenshot']; ?>" alt="">
+															<?php } ?>
 															
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h5 class="modal-title" id="exampleModalLabel">Approve Review</h5>
-																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																				<span aria-hidden="true">&times;</span>
-																			</button>
+
+															<!-- Modal -->
+															<div class="modal fade" id="exampleModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																<div class="modal-dialog" role="document">
+																
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<h5 class="modal-title" id="exampleModalLabel">Approve Review</h5>
+																				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																					<span aria-hidden="true">&times;</span>
+																				</button>
+																			</div>
+																			<div class="modal-body">
+																				<p>Do You want to approve this review?</p>
+																			</div>
+																			<div class="modal-footer">
+																				<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+																				<a href="<?= base_url() ?>front/approve_review/<?php echo $row['completed_reviews_id']; ?>/<?php echo $gig_id; ?>/<?php echo $row['link_id']; ?>/<?php echo $row['freelancer_id']; ?>"><button type="button" class="admin_btn">Yes</button></a>
+																			</div>
 																		</div>
-																		<div class="modal-body">
-																			<p>Do You want to approve this review?</p>
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-																			<a href="<?= base_url() ?>front/approve_review/<?php echo $row['id']; ?>/<?php echo $gig_id; ?>"><button type="button" class="admin_btn">Yes</button></a>
-																		</div>
-																	</div>
+																</div>
 															</div>
 														</div>
-													</div>
 
-												</div>
-												<hr>
+													</div>
+													<hr>
+												<?php } ?>
 											<?php } ?>
 										<?php } ?>
 
