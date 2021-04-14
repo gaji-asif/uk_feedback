@@ -61,7 +61,28 @@
                 </td>
                 <td class="action_btn">
                   <a href="<?php echo base_url(); ?>admin/view_work_stream/<?php echo $t['gig_id'] ?>/<?php echo $t['buyer_id'] ?>" class="card_body  a_icons"><i class="fa fa-eye" ></i></a>
-                  <a href="<?php echo base_url(); ?>admin/approve_work_stream/<?php echo $t['gig_id'] ?>/<?php echo $t['buyer_id'] ?>" class="card_body  a_icons"><i class="fa fa-check"></i></a>
+
+                <a class="a_icons delete_data" href="#" data-toggle="modal" data-target="#Deletedata<?php echo  $t['id']; ?>"><i class="fas fa-check"></i></a>
+                  <div class="modal fade" id="Deletedata<?php echo  $t['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                          <p>Do you want to delete this payment request?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                         
+                            <a href="<?php echo base_url(); ?>admin/approve_work_stream/<?php echo $t['gig_id'] ?>/<?php echo $t['buyer_id'] ?>" ><button class="btn btn-primary" type="submit">Yes</button></a>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
                 </td>
               </tr>
             <?php $i++;

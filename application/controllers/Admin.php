@@ -104,31 +104,48 @@ class Admin extends CI_Controller
 	public function changePaymentStatus()
 	{
 
+		if($_POST){
+			
+			$data1['request_id'] = $this->input->post('request_id');             
+			$data1['freelancer_id'] = $this->input->post('freelancer_id');             
+			$data1['status'] = $this->input->post('status');
+			
+			$data['status'] = $data1['status'];
+			$where = array('id' => $data1['request_id']);
+			$update = $this->Common_model->update_detail('withdrawn_requests', $data, $where);
+			// $this->Common_model->print_r2($update);
+			// exit;
+			if($update){
+			   $this->session->set_flashdata('success','sucessfully inserted');
+			}else{
+			   $this->session->set_flashdata('error','Something went wrong.');
+			}
+	 	}
 
-		$data['status'] = 1;
-		$id = $this->input->post('id');
-		$withdrawal = $this->input->post('withdrawal_amount');
-		$userid = $this->input->post('userid');
+		// $data['status'] = 1;
+		// $id = $this->input->post('id');
+		// $withdrawal = $this->input->post('withdrawal_amount');
+		// $userid = $this->input->post('userid');
 
-		$wallet = $this->Common_model->fetch_wallet_by_id($userid);
-		$data['available_amount'] = $wallet - $withdrawal;
+		// $wallet = $this->Common_model->fetch_wallet_by_id($userid);
+		// $data['available_amount'] = $wallet - $withdrawal;
 
-		$where = array('id' => $id);
-		$update = $this->Common_model->update_detail('payment_request', $data, $where);
-		if ($update) {
-			$data1['wallet'] = $wallet - $withdrawal;
-			$where1 = array('user_id' => $userid);
-			$this->Common_model->update_detail('users', $data1, $where1);
-			$title = "payment request completed";
-			$body = "Your payment request completed.$" . $withdrawal . " successfully added in your paypal account";
+		// $where = array('id' => $id);
+		// $update = $this->Common_model->update_detail('payment_request', $data, $where);
+		// if ($update) {
+		// 	$data1['wallet'] = $wallet - $withdrawal;
+		// 	$where1 = array('user_id' => $userid);
+		// 	$this->Common_model->update_detail('users', $data1, $where1);
+		// 	$title = "payment request completed";
+		// 	$body = "Your payment request completed.$" . $withdrawal . " successfully added in your paypal account";
 
 
-			$this->addNotification($title, $body, $userid);
+		// 	$this->addNotification($title, $body, $userid);
 
-			$this->session->set_flashdata('success', 'status changed successfully');
-		} else {
-			$this->session->set_flashdata('error', 'Something went wrong');
-		}
+		// 	$this->session->set_flashdata('success', 'status changed successfully');
+		// } else {
+		// 	$this->session->set_flashdata('error', 'Something went wrong');
+		// }
 		redirect('admin/payment-request');
 	}
 
@@ -316,6 +333,16 @@ class Admin extends CI_Controller
 			redirect('admin/notifications');
 		}
 	}
+	public function delete_payment_request($id)
+	{
+		$delete = $this->Common_model->delete_detail('withdrawn_requests', $id, 'id');
+		if ($delete) {
+			$this->session->set_flashdata('success', 'Payment Request deleted successfully.');
+		} else {
+			$this->session->set_flashdata('error', 'Something went wrong.');
+		}
+		return redirect('admin/payment-request');
+	}
 
 	public function manage_gigs()
 	{
@@ -380,6 +407,7 @@ class Admin extends CI_Controller
 
 				$data1['title'] = $this->input->post('title');
 				$data1['price'] = $this->input->post('price');
+				$data1['freelancer_price'] = $this->input->post('freelancer_price');
 				$data1['category_id'] = $this->input->post('category_id');
 				// $data1['subcat_id'] = $this->input->post('subcat_id');
 				$data1['delivery_days'] = $this->input->post('delivery_days');
@@ -493,6 +521,7 @@ class Admin extends CI_Controller
 				$data1['title'] = $this->input->post('title');
 				$data1['type'] = $this->input->post('type');
 				$data1['price'] = $this->input->post('price');
+				$data1['freelancer_price'] = $this->input->post('freelancer_price');
 				$data1['category_id'] = $this->input->post('category_id');
 				// $data1['subcat_id'] = $this->input->post('subcat_id');
 				$data1['delivery_days'] = $this->input->post('delivery_days');
@@ -660,8 +689,11 @@ class Admin extends CI_Controller
 	{
 		if ($this->session->userdata('user_id')) {
 			$data['title'] = 'Payment Request | Admin Panel';
-			$array = array('user_type' => 1);
-			$data['request'] = $this->Common_model->fetch_multiple_row_bywhere($array, 'payment_request', 'id', 'DESC');
+			// $array = array('user_type' => 1);
+			$array =[];
+			$data['request'] = $this->Common_model->withdrawrequest_with_usertable();
+			// $this->Common_model->print_r2($data['request']);
+			// exit;
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar');
 			$this->load->view('admin/payment-request', $data);

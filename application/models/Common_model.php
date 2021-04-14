@@ -63,12 +63,32 @@ class Common_model extends CI_Model
         $result = $row_details->result();
         return $result;
     }
+    function payment_with_link_join($freelancer_id)
+    {
+        $this->db->select("freelancer_payments.*,buyer_links.link_url");
+        $this->db->join("buyer_links", "buyer_links.id=freelancer_payments.link_id", "left");
+        $this->db->from('freelancer_payments');
+        $this->db->where('freelancer_id', $freelancer_id);
+        $this->db->order_by('id',"DESC");
+        $query = $this->db->get();
+        return $result = $query->result_array();
+    }
     function fetch_multiple_row_bywhere_with_complete_review($link_id)
     {
-        $this->db->select("buyer_links_reviews.*,completed_reviews.reviewer_name,completed_reviews.screenshot");
+        $this->db->select("buyer_links_reviews.*,completed_reviews.reviewer_name,completed_reviews.screenshot,completed_reviews.freelancer_id,completed_reviews.review_approve_status,completed_reviews.id as completed_reviews_id");
         $this->db->join("completed_reviews", "buyer_links_reviews.id=completed_reviews.review_id", "left");
         $this->db->from('buyer_links_reviews');
         $this->db->where('buyer_links_reviews.link_id', $link_id);
+        $this->db->order_by('id',"DESC");
+        $query = $this->db->get();
+        return $result = $query->result_array();
+    }
+    function withdrawrequest_with_usertable()
+    {
+        $this->db->select("withdrawn_requests.*,users.name");
+        $this->db->join("users", "withdrawn_requests.freelancer_id=users.user_id", "left");
+        $this->db->from('withdrawn_requests');
+        // $this->db->where('buyer_links_reviews.link_id', $link_id);
         $this->db->order_by('id',"DESC");
         $query = $this->db->get();
         return $result = $query->result_array();

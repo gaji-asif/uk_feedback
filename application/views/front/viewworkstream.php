@@ -230,6 +230,49 @@
 	.danger-buttons {
 		margin-top: 75px;
 	}
+	.action_btn .a_icons {
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		line-height: 23px;
+		border: 1px solid #999;
+		color: #999;
+		border-radius: 3px;
+		text-align: center;
+		text-decoration: none;
+		font-size: 13px;
+	}
+
+	.action_btn .a_icons:hover {
+		border-color: #f5a91f;
+		background-color: #f5a91f;
+		color: #ffffff;
+	}
+
+	.admin_btn {
+		color: #fff;
+		background-color: #f5a91f;
+		height: 40px;
+		line-height: 40px;
+		display: inline-block;
+		padding: 0 20px;
+		font-size: 14px;
+		border-radius: 5px;
+		text-decoration: none;
+		border: none;
+		text-align: center;
+	}
+
+	.admin_btn:hover {
+		color: #fff;
+		background-color: #222222;
+		text-decoration: none;
+	}
+	.custom_btn{
+		margin-top: 31px;
+		margin-left: -21px;
+		padding: 0px 11px;
+	}
 </style>
 <div class="sc_wrapper page_banner_section">
 	<div class="container">
@@ -296,29 +339,72 @@
 												<input type="text" name="link[<?php echo $key ?>][0][1]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Link" value="<?php echo $link['link_url'] ?>" required>
 											</div>
 
-											<?php foreach ($link['reviews'] as $key2 => $row) { ?>
-												<div class="row">
-													<div class="col-lg-8">
-														<input type="hidden" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][0]" value="<?php echo $row['id'] ?>">
-														<div class="form-group">
-															<label for="exampleInputEmail1">Reviewer</label>
-															<textarea class="form-control" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][1]" aria-label="With textarea" rows="5" required><?php echo $row['review_details'] ?></textarea>
-														</div>
-													</div>
-													<div class="col-lg-4">
-													<?php if(isset($row['reviewer_name'])){ ?>
-														<div class="form-group">
-															<label for="exampleInputEmail1">Reviewer Name</label>
-															<input type="text"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  value="<?php echo $row['reviewer_name'];  ?>">
+											<?php if(isset($link['reviews'])){?>
+												<?php foreach ($link['reviews'] as $key2 => $row) { ?>
+													<?php if ($this->session->flashdata('success-'.$row['completed_reviews_id'])) { ?>
+														<div class="alert alert-success mb-3 background-success" role="alert">
+															<?php echo $this->session->flashdata('success-'.$row['completed_reviews_id']); ?>
+															<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
 														</div>
 													<?php } ?>
-													<?php if(isset($row['screenshot'])){ ?>
-														<img src="<?= base_url() ?><?php echo $row['screenshot']; ?>" alt="">
-													<?php } ?> 
+													<div class="row">
+														<div class="col-lg-8">
+															<input type="hidden" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][0]" value="<?php echo $row['id'] ?>">
+															<div class="form-group">
+																<label for="exampleInputEmail1">Reviewer</label>
+																<textarea class="form-control" name="link[<?php echo $key ?>][1][<?php echo $key2 ?>][1]" aria-label="With textarea" rows="5" required><?php echo $row['review_details'] ?></textarea>
+															</div>
+														</div>
+														<div class="col-lg-4">
+														<div class="row">
+															<div class="col-lg-10 col-sm-10">
+																<?php if (isset($row['reviewer_name'])) { ?>
+																	<div class="form-group">
+																		<label for="exampleInputEmail1">Reviewer Email</label>
+																		<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $row['reviewer_name'];  ?>">
+																	</div>
+																<?php } ?>
+															</div>
+															<?php if (isset($row['review_approve_status']) && $row['review_approve_status'] == 0) { ?>
+																<div class="col-lg-2 col-sm-2">
+																	<a type="button" class="admin_btn custom_btn" data-toggle="modal" data-target="#exampleModal<?php echo $row['id']; ?>"><i class="fa fa-reply"></i></a>
+																</div>
+															<?php } ?>
+														</div>
+														
+															<?php if (isset($row['screenshot']) ) { ?>
+																<img src="<?= base_url() ?><?php echo $row['screenshot']; ?>" alt="">
+															<?php } ?>
+															
+
+															<!-- Modal -->
+															<div class="modal fade" id="exampleModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																<div class="modal-dialog" role="document">
+																
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<h5 class="modal-title" id="exampleModalLabel">Approve Review</h5>
+																				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																					<span aria-hidden="true">&times;</span>
+																				</button>
+																			</div>
+																			<div class="modal-body">
+																				<p>Do You want to approve this review?</p>
+																			</div>
+																			<div class="modal-footer">
+																				<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+																				<a href="<?= base_url() ?>front/approve_review/<?php echo $row['completed_reviews_id']; ?>/<?php echo $gig_id; ?>/<?php echo $row['link_id']; ?>/<?php echo $row['freelancer_id']; ?>"><button type="button" class="admin_btn">Yes</button></a>
+																			</div>
+																		</div>
+																</div>
+															</div>
+														</div>
+
 													</div>
-												
-												</div>
-												<hr>
+													<hr>
+												<?php } ?>
 											<?php } ?>
 										<?php } ?>
 
