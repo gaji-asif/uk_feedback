@@ -42,7 +42,7 @@
 						<div class="form_group">
 							<label class="form_label">Price</label>
 							<div class="input_group">
-								<input type="text" placeholder="Enter Price" class="form-control" name="price">
+								<input type="text" placeholder="Enter Price" class="form-control" name="price" >
 							</div>
 						</div>
 					</div>
@@ -50,7 +50,7 @@
 						<div class="form_group">
 							<label class="form_label">Freelancer Price</label>
 							<div class="input_group">
-								<input type="text" placeholder="Enter Freelancer Price" class="form-control" name="freelancer_price">
+								<input type="text" placeholder="Enter Freelancer Price" class="form-control" name="freelancer_price" required>
 							</div>
 						</div>
 					</div>

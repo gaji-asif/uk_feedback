@@ -109,14 +109,30 @@ class Admin extends CI_Controller
 			$data1['request_id'] = $this->input->post('request_id');             
 			$data1['freelancer_id'] = $this->input->post('freelancer_id');             
 			$data1['status'] = $this->input->post('status');
-			
+			$data1['withdrawal_amount'] = $this->input->post('withdrawal_amount');
+			// $this->Common_model->print_r2($data1['freelancer_id']);
+			// exit;	
 			$data['status'] = $data1['status'];
 			$where = array('id' => $data1['request_id']);
 			$update = $this->Common_model->update_detail('withdrawn_requests', $data, $where);
-			// $this->Common_model->print_r2($update);
+			// $this->Common_model->print_r2($data1['status']);
 			// exit;
+			
 			if($update){
-			   $this->session->set_flashdata('success','sucessfully inserted');
+				if($data1['status'] == 1)
+				{
+					$user = $this->Common_model->fetch_single_row(['user_id'=>$data1['freelancer_id']], 'users');
+				
+					$amount = $user->wallet - $data1['withdrawal_amount'];
+					// $this->Common_model->print_r2($amount);
+					// exit;
+					$where = array('user_id' => $data1['freelancer_id']);
+	
+					$data2['wallet'] = $amount;
+					 $this->Common_model->update_detail('users', $data2, $where);
+				}
+	
+			   $this->session->set_flashdata('success','Status changed sucessfully');
 			}else{
 			   $this->session->set_flashdata('error','Something went wrong.');
 			}

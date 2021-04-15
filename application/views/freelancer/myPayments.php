@@ -80,7 +80,7 @@
 						
 								<div class="form-group">
 									<label for="exampleInputEmail1">Withdraw Amount</label>
-									<input type="number" name="request_amount" class="form-control" id="exampleInputEmail1" min='0.1' step="0.1" max="<?php if(isset($totalAmount)) echo $totalAmount; ?>" placeholder="Enter Withdraw Amount">
+									<input type="number" name="request_amount" class="form-control" id="exampleInputEmail1" min='0.1' step="0.1" max="<?php if(isset($totalAmount)) echo $totalAmount; ?>" placeholder="Enter Withdraw Amount" required>
 								</div>
 							<input type="hidden" name="available_amount" value="<?php if(isset($totalAmount)) echo $totalAmount; ?>">
 

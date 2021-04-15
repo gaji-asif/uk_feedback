@@ -59,9 +59,9 @@
                     <div class="modal-dialog" role="document">
                       <form method="post" action="<?= base_url('admin/changePaymentStatus'); ?>">
                         <input type="hidden" name="id" value="" id="uid">
-                        <input type="hidden" name="withdrawal_amount" value="" id="withdrawal_amount">
+                        <input type="hidden" name="withdrawal_amount"  value="<?php echo $r['request_amount']; ?>">
                         
-                        <input type="hidden" name="freelancer_id" value="<?php echo $r['freelancer_id']; ?>" id="userid">
+                        <input type="hidden" name="freelancer_id" value="<?php echo $r['freelancer_id']; ?>" >
                         <input type="hidden" name="request_id" value="<?php echo $r['id']; ?>" id="userids">
 
                         <div class="modal-content">
@@ -77,8 +77,8 @@
                               <label class="form_label">Select status</label>
                               <div class="input_group">
                                 <select class="form-control" name="status" id="userstatus">
-                                  <option value="0">pending</option>
-                                  <option value="1">completed</option>
+                                  <option value="0"<?php if($r['status'] == 0 ) echo 'selected'; ?> >pending</option>
+                                  <option value="1" <?php if($r['status'] == 1 ) echo 'selected'; ?>>completed</option>
 
                                 </select>
                               </div>

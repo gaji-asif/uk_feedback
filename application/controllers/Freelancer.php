@@ -251,18 +251,13 @@ class Freelancer extends CI_Controller {
 	    $data['keyword'] = '';
 	    $this->load->view('header',$data);
 	    $array=array('user_id'=>$this->session->userdata('userid'));
-	    // $data['payment']=$this->Common_model->fetch_multiple_row_bywhere($array,'payment_request','id','DESC');
+
 	    $data['payment']=$this->Common_model->payment_with_link_join($this->session->userdata('userid'));
-		// $this->Common_model->print_r2($data['payment']);
-		// exit;
-		$totalAmount = 0; 
-		foreach($data['payment'] as $payment)
-		{
-			$totalAmount += $payment['price'];
-		}
-		$data['totalAmount'] = $totalAmount;
-		// 	$this->Common_model->print_r2($totalAmount);
-		// exit;
+	
+		$user = $this->Common_model->fetch_single_row($array, 'users');
+	
+		$data['totalAmount'] = $user->wallet;
+
 	    $this->load->view('freelancer/myPayments',$data);
 		$this->load->view('footer');
 	}	

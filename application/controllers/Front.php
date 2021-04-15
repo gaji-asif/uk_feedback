@@ -47,6 +47,11 @@ class Front extends CI_Controller
 		$data['gimg'] = $this->Common_model->fetch_multiple_row_bywheree($array, 'gigs_img', 'id', 'DESC');
 		$data['addons'] = $this->Common_model->fetch_multiple_row_bywheree($array, 'gigs_addons', 'id', 'DESC');
 		$data['review'] = $this->Common_model->fetch_multiple_row_bywheree($array, 'review', 'id', 'DESC');
+
+		
+		$data['new_gigs'] = $this->Common_model->fetch_gig_with_buyer_gigs($this->session->userdata('userid'),$id);
+		// $this->Common_model->print_r2($data['new_gigs']);
+		// exit;
 		$data['gig_id'] = $id;
 		$data['username'] = $this->session->userdata('username');
 		$data['user_id'] = $this->session->userdata('userid');
@@ -87,7 +92,18 @@ class Front extends CI_Controller
 		$data3['price'] = $gig->freelancer_price;
 		$data3['date'] =  date('Y-m-d');
 		$insert = $this->Common_model->insert_detail($data3, 'freelancer_payments');
+
+		$array3 = array('user_id' => $data3['freelancer_id']);
+		$totalAmount = $this->Common_model->fetch_single_row($array3, 'users');
 		
+		$price = 0; 
+		$price = $totalAmount->wallet+$data3['price'];
+	
+		$this->Common_model->update_detail('users',['wallet'=>$price],$array3);
+		// $this->Common_model->print_r2($price);
+		// exit;
+		// $this->Common_model->print_r2($price);
+		// exit;
 		$this->session->set_flashdata('success-'.$id, 'This Reveiw successfully approved.');
 
 		redirect("front/viewWorkStram/".$data['gig_id']);

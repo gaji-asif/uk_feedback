@@ -371,6 +371,10 @@
 																<div class="col-lg-2 col-sm-2">
 																	<a type="button" class="admin_btn custom_btn" data-toggle="modal" data-target="#exampleModal<?php echo $row['id']; ?>"><i class="fa fa-reply"></i></a>
 																</div>
+															<?php } if(isset($row['review_approve_status']) && $row['review_approve_status'] == 1){?>
+																<div class="col-lg-2 col-sm-2">
+																	<a type="button" class="admin_btn custom_btn" style="padding:0px 6px;;" disabled>Approved</a>
+																</div>
 															<?php } ?>
 														</div>
 														

@@ -73,6 +73,19 @@ class Common_model extends CI_Model
         $query = $this->db->get();
         return $result = $query->result_array();
     }
+    function fetch_gig_with_buyer_gigs($user_id,$gig_id)
+    {
+        $this->db->select("gigs.*,buyer_gigs.*");
+        $this->db->join("buyer_gigs","gigs.g_id=buyer_gigs.gigs_id", "left");
+        $this->db->from('gigs');
+        $this->db->where('buyer_gigs.payment_status', 1);
+        $this->db->where('buyer_gigs.status', 1);
+        $this->db->where('buyer_gigs.user_id', $user_id);
+        $this->db->where('gigs.g_id', $gig_id);
+        $this->db->order_by('id',"DESC");
+        $query = $this->db->get();
+        return $result = $query->result_array();
+    }
     function fetch_multiple_row_bywhere_with_complete_review($link_id)
     {
         $this->db->select("buyer_links_reviews.*,completed_reviews.reviewer_name,completed_reviews.screenshot,completed_reviews.freelancer_id,completed_reviews.review_approve_status,completed_reviews.id as completed_reviews_id");

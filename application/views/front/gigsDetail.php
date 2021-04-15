@@ -247,12 +247,15 @@
 					<li class="nav-item">
 						<a class="nav-link active" href="#">Offer Details</a>
 					</li>
+				<?php if(!empty($new_gigs) && isset($new_gigs)){ ?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?= base_url() ?>front/WorkStram/<?php echo $gig_id; ?>">Work Stream</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="<?= base_url() ?>front/viewWorkStram/<?php echo $gig_id; ?>">View Work Stream</a>
 					</li>
+				<?php }?>
+
 				</ul>
 			<?php } ?>
 				<div class="offer_detail_cover">
