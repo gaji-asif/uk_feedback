@@ -35,7 +35,8 @@
 					<div class="img_box"><img src="<?=base_url()?>assets/front/images/avatar/avatar_img.jpg" class="img-fluid"></div>
 					<div class="contents">
 						<div class="contents_txt">
-							<h4><?=$gig->title?></h4>
+						
+							<a href="<?=base_url()?>front/gigsDetail/<?=$gig->g_id?>"><h4><?=$gig->title?></h4></a>
 							<div class="prices"><span class="spn_1">price</span><span class="spn_2">$<?=$mg->amount?></span></div>
 							<div class="date_time"><i class="fas fa-clock"></i><?=$this->Common_model->convert_date('d-m-Y h:i:a',$mg->created_on);?></div>
 							<div class="info_txt status"><span class="span_1">status</span><span class="span_2"><?php if($mg->status==1){ echo "completed"; } else { echo "running"; } ?></span></div>

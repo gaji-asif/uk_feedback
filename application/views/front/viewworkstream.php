@@ -362,14 +362,21 @@
 															<div class="col-lg-10 col-sm-10">
 																<?php if (isset($row['reviewer_name'])) { ?>
 																	<div class="form-group">
-																		<label for="exampleInputEmail1">Reviewer Email</label>
-																		<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $row['reviewer_name'];  ?>">
+																		<label for="exampleInputEmail1">Reviewer Name</label>
+																		<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $row['reviewer_name'];  ?>">
 																	</div>
 																<?php } ?>
 															</div>
 															<?php if (isset($row['review_approve_status']) && $row['review_approve_status'] == 0) { ?>
 																<div class="col-lg-2 col-sm-2">
-																	<a type="button" class="admin_btn custom_btn" data-toggle="modal" data-target="#exampleModal<?php echo $row['id']; ?>"><i class="fa fa-reply"></i></a>
+																<label class="input_label">Status</label>
+																		<div class="usr_status_radion">
+																			<label>
+																				<a href="#" class="" data-toggle="modal" data-target="#exampleModal<?php echo $row['id']; ?>">
+																				<span class="text"><i class="fas fa-check"></i></span></a>
+																			</label>
+																		</div>
+																	<!-- <a type="button" class="admin_btn custom_btn" data-toggle="modal" data-target="#exampleModal<?php echo $row['id']; ?>"><i class="fa fa-check"></i></a> -->
 																</div>
 															<?php } if(isset($row['review_approve_status']) && $row['review_approve_status'] == 1){?>
 																<div class="col-lg-2 col-sm-2">
@@ -448,7 +455,7 @@
 	$(document).ready(function() {
 		$(".btn-success").click(function() {
 			var html = $(".clone").html();
-			$(".increment").after(html);
+			$(".increment").appendTo(html);
 		});
 
 		$("body").on("click", ".btn-danger", function() {

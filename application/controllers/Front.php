@@ -268,7 +268,8 @@ class Front extends CI_Controller
 			if ($data2['check_login']->user_type == 1) {
 				redirect('freelancer/dashboard');
 			} else {
-				redirect('buyer/dashboard');
+				// redirect('buyer/dashboard');
+				redirect('buyer/my-gigs');
 			}
 		} else {
 			$this->session->set_flashdata('error', 'invalid credentials');

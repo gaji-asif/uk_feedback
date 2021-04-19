@@ -176,9 +176,9 @@
 																				
 																					</div>
 																					<div class="form_group pb-1">
-																						<label class="form_label">Reviewer Email</label>
+																						<label class="form_label">Reviewer Name</label>
 																						<div class="input_group">
-																							<input type="email" class="form-control" name="reviewer_name" required >
+																							<input type="text" class="form-control" name="reviewer_name" required >
 																						</div>
 																					</div>
 																					<div class="form_group pb-1">

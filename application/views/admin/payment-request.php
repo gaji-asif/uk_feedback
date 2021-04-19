@@ -21,6 +21,7 @@
             <tr>
               <th>Id</th>
               <th>Freelancer Name</th>
+              <th>Paypal Email</th>
               <th>available balance</th>
               <th>withdrawal amount</th>
               <!-- <th>payment by</th> -->
@@ -47,6 +48,7 @@
               <tr>
                 <td><?= $i++; ?></td>
                 <td><?php echo $r['name']; ?></td>
+                <td><?php echo $r['paypal_email']; ?></td>
                 <td>$ <?php echo  $r['available_amount']; ?></td>
                 <td>$ <?php echo $r['request_amount']; ?></td>
                 <td><?= $status; ?></td>

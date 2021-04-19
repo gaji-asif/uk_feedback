@@ -71,7 +71,7 @@
 			<div class="dash_content_cover pb-5">
 				<div class="dash_content_area">
 				<?php include 'tabs-menu.php';?>
-				<?php if($this->session->flashdata('success')){ ?>
+				<?php if($this->session->flashdata('successs')){ ?>
 											<div class="alert alert-success mb-3 background-success" role="alert">
 											<?php echo $this->session->flashdata('success'); ?>
 												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -101,8 +101,8 @@
 												<thead>
 													<tr>
 														<th>SL</th>
-														<!-- <th>Gig Name</th> -->
 														<th>Link</th>
+														<th>Review Price</th>
 														<th width="12%" >Date</th>
 														<th>Action</th>
 													</tr>
@@ -118,6 +118,7 @@
 															<td><?= $i++; ?></td>
 														
 															<td><?php echo $link['link_url']; ?></td>
+															<td>$<?php echo $link['freelancer_price']; ?></td>
 															<td><?php echo $this->Common_model->convert_date('d-m-y', $link['date']);; ?></td>
 															<td class="action_btn">
 																<a href="<?php echo base_url(); ?>freelancer/show_reviews/<?php echo $link['id'] ?>/<?php echo $link['gig_cat_id'] ?>" class="card_body  a_icons"><i class="fa fa-eye"></i></a>

@@ -108,7 +108,7 @@ class Common_model extends CI_Model
     }
     function fetch_cat_wise_links_with_gig($cat_id)
     {
-        $this->db->select("buyer_links.*,gigs.title");
+        $this->db->select("buyer_links.*,gigs.title,gigs.freelancer_price");
         $this->db->join("gigs", "gigs.g_id=buyer_links.gig_id", "left");
         $this->db->from('buyer_links');
         $this->db->where('buyer_links.approve_status', '1');
