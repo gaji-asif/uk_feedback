@@ -33,40 +33,53 @@ class Offers extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	public function index()
+	public function index($id)
 	{
+		// print_r(1);
+		// exit;
 	    $data['title'] = '';
 	    $data['description'] = '';
 	    $data['keyword'] = '';
+	    $data['id'] = $id;
 	    $this->load->view('header',$data);
-	    if($_POST){	         	    	
-            $data1['name'] = $this->input->post('name');
-            $data1['email'] = $this->input->post('email');
-            $data1['country'] = $this->input->post('country');
-            $data1['gender'] = $this->input->post('gender');
-             if($_FILES['cover_img']['name']!=""){
-            $target1 = "uploads/user/".basename($_FILES['profile_pic']['name']);
-            move_uploaded_file($_FILES['profile_pic']['tmp_name'], $target1);
-            $data1['profile_pic']=basename($_FILES['profile_pic']['name']);
-            }else{
-             $data1['profile_pic']="";   
-            }
-            $where=array('user_id'=>$this->session->userdata('userid'));
-            $update=$this->Common_model->update_detail('users',$data1,$where); 
-            if($update){
+	    // if($_POST){	         	    	
+        //     $data1['name'] = $this->input->post('name');
+        //     $data1['email'] = $this->input->post('email');
+        //     $data1['country'] = $this->input->post('country');
+        //     $data1['gender'] = $this->input->post('gender');
+        //      if($_FILES['cover_img']['name']!=""){
+        //     $target1 = "uploads/user/".basename($_FILES['profile_pic']['name']);
+        //     move_uploaded_file($_FILES['profile_pic']['tmp_name'], $target1);
+        //     $data1['profile_pic']=basename($_FILES['profile_pic']['name']);
+        //     }else{
+        //      $data1['profile_pic']="";   
+        //     }
+        //     $where=array('user_id'=>$this->session->userdata('userid'));
+        //     $update=$this->Common_model->update_detail('users',$data1,$where); 
+        //     if($update){
               
-                $this->session->set_flashdata('success','updated successfully.');
-                redirect('buyer/my-profile');
+        //         $this->session->set_flashdata('success','updated successfully.');
+        //         redirect('buyer/my-profile');
                
                 
-            }else{
-               $this->session->set_flashdata('error','Something went wrong.');
+        //     }else{
+        //        $this->session->set_flashdata('error','Something went wrong.');
                
-            }
-        }
-	    $array=array('user_id'=>$this->session->userdata('userid'));
-	    $data['p']=$this->Common_model->fetch_single_row($array,'users');
-	    $this->load->view('front/offers',$data);
+        //     }
+        // }
+		
+	    // $array=array('user_id'=>$this->session->userdata('userid'));
+	    // $data['p']=$this->Common_model->fetch_single_row($array,'users');
+	    
+		
+
+		$array1 = array('status' => 1, 'is_deleted' => 0, 'type' => 1,'category_id' => $id);
+		$data['featuredgigs'] = $this->Common_model->fetch_multiple_row_bywhere($array1, 'gigs', 'g_id', 'RANDOM', 4);
+		
+		$array2 = array('status' => 1, 'is_deleted' => 0,'category_id' => $id);
+		$data['gigs'] = $this->Common_model->fetch_multiple_row_bywhere($array2, 'gigs', 'g_id', 'DESC', 20);
+		
+		$this->load->view('front/offers',$data);
 		$this->load->view('footer');
 	}
 	

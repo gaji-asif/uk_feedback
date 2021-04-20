@@ -434,7 +434,7 @@
 								<input type='hidden' name='business' value='sanjeevvishwakarmaster@gmail.com'>
 								<input type='hidden' name='item_name' value='I will create a stunning and proficient facebook page within 2 hours'>
 								<input type='hidden' name='item_number' value='ITM1001'>
-								<input type='hidden' name='amount' value='<?= $gigs->price ?>'>
+								<input type='hidden' name='amount' id="paypal_price" value='<?= $gigs->price ?>'>
 								<input type='hidden' name='no_shipping' value='1'>
 								<input type='hidden' name='currency_code' value='USD'>
 								<input type='hidden' name='notify_url' value='http://ameygraphics.com/Gigs/front/notify'>

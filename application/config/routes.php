@@ -126,7 +126,7 @@ $route['cancel'] = 'front/cancel';
 $route['notify'] = 'front/notify';
 $route['return'] = 'front/return';
 
-$route['offers'] = 'offers/index';
+$route['offers/(:num)'] = 'offers/index/$1';
 
 $route['thankyou'] = 'front/thankyou';
 

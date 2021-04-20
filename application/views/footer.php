@@ -115,8 +115,10 @@ $('.addons').change(function() {
     });
  
  
+	console.log($("#paypal_price").val());
     $("#total_amt").text(total);
      $("#total_price").val(total);
+     $("#paypal_price").val(total);
 });
     
 

@@ -82,7 +82,7 @@
 
 					<?php if (isset($id)) { ?>
 						<?php if (isset($links)) { ?>
-							<div class="form_heading">
+							<div class="form_heading">	
 								<h4><?php echo $category->cat_name ?></h4>
 							</div>
 							<div class="">

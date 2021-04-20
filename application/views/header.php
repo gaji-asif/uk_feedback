@@ -187,7 +187,7 @@
 								<?php
 								if ($this->session->userdata('userid')) { ?>
 									<li><a href="<?= base_url() ?>affiliates">Become an Affiliate</a></li>
-									<li><a href="<?= base_url() ?>offers">Our Offers</a></li>
+									<li><a href="<?= base_url() ?>offers/1">Our Offers</a></li>
 								<?php
 								}
 								?>
