@@ -34,3 +34,99 @@ WHERE `buyer_gigs`.`payment_status` = 1
 AND `buyer_gigs`.`status` = 1
 AND `user_id` = '23'
 ORDER BY `id` DESC
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:56:40 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Undefined variable: b C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
+ERROR - 2021-04-15 22:57:18 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\manage_gigs.php 51
