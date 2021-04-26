@@ -146,7 +146,8 @@ class Freelancer extends CI_Controller {
            
         }
 	}
-		public function dashboard_demo()
+	
+	public function dashboard_demo()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';
@@ -296,7 +297,7 @@ class Freelancer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-		public function updateReviewContent()
+	public function updateReviewContent()
 	{
 	  
 	     if($_POST){
@@ -345,7 +346,7 @@ class Freelancer extends CI_Controller {
 	
 	}
 	
-		public function submitReview()
+	public function submitReview()
 	{
 	  
 	     if($_POST){
@@ -394,7 +395,7 @@ class Freelancer extends CI_Controller {
 	
 	}
 	
-		public function changePassword()
+	public function changePassword()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';

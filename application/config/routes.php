@@ -130,7 +130,8 @@ $route['offers/(:num)'] = 'offers/index/$1';
 
 $route['thankyou'] = 'front/thankyou';
 
-
+$route['my-stripe'] = "front/stripe_page";
+$route['stripePost']['post'] = "front/stripePost";
 
 /*
 | -------------------------------------------------------------------------
