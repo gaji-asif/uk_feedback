@@ -268,7 +268,8 @@ class Front extends CI_Controller
 			if ($data2['check_login']->user_type == 1) {
 				redirect('freelancer/dashboard');
 			} else {
-				redirect('buyer/dashboard');
+				// redirect('buyer/dashboard');
+				redirect('buyer/my-gigs');
 			}
 		} else {
 			$this->session->set_flashdata('error', 'invalid credentials');
@@ -508,4 +509,48 @@ class Front extends CI_Controller
 		$data1['created_at'] = date('Y-m-d');
 		$insert = $this->Common_model->insert_detail($data1, 'messages');
 	}
+
+	public function stripe_page()
+    {
+        $this->load->view('my_stripe');
+    }
+       
+    /**
+     * Get All Data from this method.
+     *
+     * @return Response
+    */
+    public function stripePost()
+    {
+        require_once('application/libraries/stripe-php/init.php');
+		$amount = $this->input->post('amount');
+        \Stripe\Stripe::setApiKey($this->config->item('stripe_secret'));
+        $create = \Stripe\Charge::create ([
+                "amount" => $amount * 100,
+                "currency" => "usd",
+                "source" => $this->input->post('stripeToken'),
+                "description" => "Test payment from itsolutionstuff.com." 
+        ]);
+    
+		if(($create->status == 'succeeded'))
+		{
+			$data=[];
+			$data['gigs_id'] = $this->input->post('gig_id');
+			$data['user_id'] = $this->session->userdata('userid');
+			$data['amount'] = $amount;
+			$data['status'] = 1;
+			$data['payment_by'] = 2;
+			$data['payment_status'] = 1;
+			$data['date'] = date('Y-m-d');
+			$data['created_on'] = date('Y-m-d H:i:s');
+
+			$inserData = $this->Common_model->insert_detail($data, 'buyer_gigs');
+			if(!empty($inserData))
+			{
+				$this->session->set_flashdata('success', 'Payment made successfully.');
+			}
+		}
+	
+        redirect('front/gigsDetail/'.$this->input->post('gig_id'), 'refresh');
+    }
 }

@@ -72,7 +72,7 @@ class Buyer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-		public function myGigs()
+	public function myGigs()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';
@@ -85,7 +85,7 @@ class Buyer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-		public function myReferrals()
+	public function myReferrals()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';
@@ -94,7 +94,7 @@ class Buyer extends CI_Controller {
 	    $this->load->view('buyer/myReferrals',$data);
 		$this->load->view('footer');
 	}
-		public function myPayments()
+	public function myPayments()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';
@@ -107,7 +107,7 @@ class Buyer extends CI_Controller {
 		$this->load->view('footer');
 	}		
 	
-		public function updateReviewContent()
+	public function updateReviewContent()
 	{
 	  
 	     if($_POST){
@@ -156,7 +156,7 @@ class Buyer extends CI_Controller {
 	
 	}
 	
-		public function approveReview($id)
+	public function approveReview($id)
 	{
 	    
         $data['payment_status'] = 1;
@@ -192,7 +192,7 @@ class Buyer extends CI_Controller {
 	    
 	}
 	
-		public function disapproveReview($id)
+	public function disapproveReview($id)
 	{
 	    
         $data['payment_status'] = 2;
@@ -226,7 +226,7 @@ class Buyer extends CI_Controller {
 	}
 	
 	
-		public function changePassword()
+	public function changePassword()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';

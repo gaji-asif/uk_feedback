@@ -527,3 +527,6 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+$config['stripe_key'] = 'pk_test_QXkB6Jjve2Q0BDE5PRiKEG0K004PyqAuPu';
+$config['stripe_secret'] = 'sk_test_CdAzjUeRIF13nsMSm2m3nk1b0046F2lEfg';

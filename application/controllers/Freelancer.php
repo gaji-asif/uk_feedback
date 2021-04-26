@@ -69,6 +69,8 @@ class Freelancer extends CI_Controller {
 		//  $this->Common_model->print_r2($data['links']);
 		// 	exit;
 		}
+		// $this->Common_model->print_r2($data['links']);
+		// exit;
 	    $this->load->view('freelancer/dashboard',$data);
 		$this->load->view('footer');
 	}
@@ -132,7 +134,7 @@ class Freelancer extends CI_Controller {
 					$this->Common_model->update_detail('buyer_links',$data4,$where); 
 				}
 				if($insert){
-				    $this->session->set_flashdata('success','Complete Review successfully.');
+				    $this->session->set_flashdata('successs','Complete Review successfully.');
 					return redirect('freelancer/dashboard/'.$data1['gig_cat_id']);
 				}else{
 				   $this->session->set_flashdata('error','Something went wrong.');
@@ -144,7 +146,8 @@ class Freelancer extends CI_Controller {
            
         }
 	}
-		public function dashboard_demo()
+	
+	public function dashboard_demo()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';
@@ -294,7 +297,7 @@ class Freelancer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-		public function updateReviewContent()
+	public function updateReviewContent()
 	{
 	  
 	     if($_POST){
@@ -343,7 +346,7 @@ class Freelancer extends CI_Controller {
 	
 	}
 	
-		public function submitReview()
+	public function submitReview()
 	{
 	  
 	     if($_POST){
@@ -392,7 +395,7 @@ class Freelancer extends CI_Controller {
 	
 	}
 	
-		public function changePassword()
+	public function changePassword()
 	{
 	    $data['title'] = '';
 	    $data['description'] = '';
@@ -439,6 +442,7 @@ class Freelancer extends CI_Controller {
                 $data1['freelancer_id'] = $this->session->userdata('userid');
                 $data1['available_amount'] = $this->input->post('available_amount');             
                 $data1['request_amount'] = $this->input->post('request_amount');
+                $data1['paypal_email'] = $this->input->post('paypal_email');
                 // $data1['user_type'] = 1;
                 $data1['date'] = date('Y-m-d');
               

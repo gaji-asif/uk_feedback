@@ -1,4 +1,46 @@
 <!-- breadcrumb section start -->
+<style>
+	.tabs_menu>li {
+		margin-right: 10px;
+	}
+
+	.btn-style-active {
+		background-color: var(--primary_color);
+		color: #fff;
+	}
+
+	.btn-style:hover {
+		color: white;
+	}
+
+	.btn-style {
+		background-color: var(--black_color);
+		color: #fff;
+	}
+
+	.form_heading {
+		padding: 8px 0px 8px 0px;
+	}
+	.action_btn .a_icons {
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		line-height: 23px;
+		border: 1px solid #999;
+		color: #999;
+		border-radius: 3px;
+		text-align: center;
+		text-decoration: none;
+		font-size: 13px;
+	}
+	.action_btn .a_icons:hover{
+		border-color: #f5a91f;
+		background-color: #f5a91f;
+		color: #ffffff;
+	}
+</style>
+
+
 <div class="sc_wrapper page_banner_section"> 
 	<div class="container">
 		<div class="row">
@@ -24,19 +66,56 @@
 	<div class="container">
 		<div class="row">
 			<!-- product image start -->
-			<div class="col-lg-4 col-sm-12 col-12">
-				<div class="about_thumb">
-					<img src="<?=base_url()?>assets/front/images/about_img.jpg" alt="About" class="img-fluid">
+			<?php include 'tabs-menu.php';?>
+		</div>
+	</div>
+</div>
+
+<div class="sc_wrapper offers_section_wrap bg_gray pad_top_bottom_60">
+	<div class="container">
+		<div class="heading_section">
+			<h3 class="heading">Our offers</h3>
+		</div>
+		<div class="row">
+		    <?php 
+		    foreach($featuredgigs as $gigss){?>
+			<div class="col-lg-3 col-sm-6 col-12 offer_colms">
+				<div class="offer_items">
+					<a href="<?=base_url()?>front/gigsDetail/<?=$gigss->g_id?>" class="offer_lnks">
+						<div class="img_box">
+							<img src="<?=base_url()?>uploads/Gigs/<?=$gigss->cover_img?>" alt="Offer" class="img-fluid">
+						</div>
+						<div class="content_box">
+							<h5 class="offer_title"><?=limit_text($gigss->title, 11);?></h5>
+							<div class="ofr_amount">
+							  <span class="price">$<?=$gigss->price?></span>
+							</div>
+						</div>
+					</a>
 				</div>
 			</div>
-			<div class="col-lg-8 col-sm-12 col-12">
-				<div class="about_text">
-					<h3>Our Offers</h3>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-					<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-					</p>
+			<?php }?>
+		    <?php 
+		    foreach($gigs as $gig){?>
+			<div class="col-lg-3 col-sm-6 col-12 offer_colms">
+				<div class="offer_items">
+					<a href="<?=base_url()?>front/gigsDetail/<?=$gig->g_id?>" class="offer_lnks">
+						<div class="img_box">
+							<img src="<?=base_url()?>uploads/Gigs/<?=$gig->cover_img?>" alt="Offer" class="img-fluid">
+						</div>
+						<div class="content_box">
+							<h5 class="offer_title"><?=limit_text($gig->title, 11);?></h5>
+							<div class="ofr_amount">
+							  <span class="price">$<?=$gig->price?></span>
+							</div>
+						</div>
+					</a>
 				</div>
 			</div>
+			<?php }?>
+			
+			
+			
 		</div>
 	</div>
 </div>

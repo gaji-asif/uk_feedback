@@ -216,6 +216,30 @@
 		overflow-y: auto;
 	}
 </style>
+<style type="text/css">
+	.panel-title {
+		display: inline;
+		font-weight: bold;
+	}
+
+	.display-table {
+		display: table;
+	}
+
+	.display-tr {
+		display: table-row;
+	}
+
+	.display-td {
+		display: table-cell;
+		vertical-align: middle;
+		width: 61%;
+	}
+
+	.hide {
+		display: none;
+	}
+</style>
 <div class="sc_wrapper page_banner_section">
 	<div class="container">
 		<div class="row">
@@ -242,22 +266,30 @@
 		<div class="row">
 			<!-- offer Detail column -->
 			<div class="col-lg-8 col-sm-12 col-12">
-			<?php if (!empty($_SESSION['userid']) && $_SESSION['userid'] != '') { ?>
-				<ul class="nav nav-tabs">
-					<li class="nav-item">
-						<a class="nav-link active" href="#">Offer Details</a>
-					</li>
-				<?php if(!empty($new_gigs) && isset($new_gigs)){ ?>
-					<li class="nav-item">
-						<a class="nav-link" href="<?= base_url() ?>front/WorkStram/<?php echo $gig_id; ?>">Work Stream</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="<?= base_url() ?>front/viewWorkStram/<?php echo $gig_id; ?>">View Work Stream</a>
-					</li>
-				<?php }?>
+				<?php if ($this->session->flashdata('success')) { ?>
+					<div class="alert alert-success mb-3 background-success" role="alert">
+						<?php echo $this->session->flashdata('success'); ?>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				<?php } ?>
+				<?php if (!empty($_SESSION['userid']) && $_SESSION['userid'] != '') { ?>
+					<ul class="nav nav-tabs">
+						<li class="nav-item">
+							<a class="nav-link active" href="#">Offer Details</a>
+						</li>
+						<?php if (!empty($new_gigs) && isset($new_gigs)) { ?>
+							<li class="nav-item">
+								<a class="nav-link" href="<?= base_url() ?>front/WorkStram/<?php echo $gig_id; ?>">Work Stream</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="<?= base_url() ?>front/viewWorkStram/<?php echo $gig_id; ?>">View Work Stream</a>
+							</li>
+						<?php } ?>
 
-				</ul>
-			<?php } ?>
+					</ul>
+				<?php } ?>
 				<div class="offer_detail_cover">
 					<div class="offer_item_detail white_box m_b_30">
 
@@ -434,7 +466,7 @@
 								<input type='hidden' name='business' value='sanjeevvishwakarmaster@gmail.com'>
 								<input type='hidden' name='item_name' value='I will create a stunning and proficient facebook page within 2 hours'>
 								<input type='hidden' name='item_number' value='ITM1001'>
-								<input type='hidden' name='amount' value='<?= $gigs->price ?>'>
+								<input type='hidden' name='amount' id="paypal_price" value='<?= $gigs->price ?>'>
 								<input type='hidden' name='no_shipping' value='1'>
 								<input type='hidden' name='currency_code' value='USD'>
 								<input type='hidden' name='notify_url' value='http://ameygraphics.com/Gigs/front/notify'>
@@ -447,7 +479,8 @@
 
 
 
-							<input type="button" name="coinbase" id="coinbase" value="Coinbase" onclick="goCoinbase('<?php echo $_SESSION['userid']; ?>','<?php echo $gigs->g_id; ?>')" class="buy_button black_button" style="margin-top:10px;">
+
+							<button type="button" name="coinbase" id="coinbase" data-toggle="modal" data-target="#myModal" class="buy_button black_button" style="margin-top:10px;">Stripe</button>
 
 
 						<?php } else { ?>
@@ -557,10 +590,140 @@
 		</div>
 	</div>
 </div>
-<script>
-	function goCoinbase(uid, gigid) {
-		window.location.href = 'https://www.coinbase.com/oauth/authorize?client_id=c3a138e8c1f60537e8f1d458e649d340af6879651fb75f03db2a79e718f629be&redirect_uri=https%3A%2F%2Fameygraphics.com%2FGigs%2Fcallback&response_type=code&scope=wallet%3Auser%3Aread&uid=' + uid + '&gigid=' + gigid;
-	}
-</script>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<!-- <div class="text-right m-2">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+		</div> -->
+
+			<div class="modal-body">
+				<div class="panel-heading display-table">
+					<div class="row display-tr">
+						<h3 class="panel-title display-td">Payment Details</h3>
+						<div class="display-td">
+							<img class="img-responsive pull-right" src="<?= base_url() ?>assets/stripe.png">
+						</div>
+					</div>
+				</div>
+				<?php if ($this->session->flashdata('success')) { ?>
+					<div class="alert alert-success text-center">
+
+						<p><?php echo $this->session->flashdata('success'); ?></p>
+					</div>
+				<?php } ?>
+				<form role="form" action="<?= base_url() ?>front/stripePost" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="<?php echo $this->config->item('stripe_key') ?>" id="payment-form">
+
+					<input type="hidden" name="gig_id" value="<?php echo $gig_id; ?>">
+					<input type='hidden' name='amount' id="stripe_price" value='<?= $gigs->price ?>'>
+					<div class=''>
+						<div class='col-xs-12 form-group required'>
+							<label class='control-label'>Name on Card</label> <input class='form-control' size='4' type='text'>
+						</div>
+					</div>
+
+					<div class=''>
+						<div class='col-xs-12 form-group  required'>
+							<label class='control-label'>Card Number</label> <input autocomplete='off' class='form-control card-number' size='20' type='text'>
+						</div>
+					</div>
+
+					<div class='form-row row'>
+						<div class='col-xs-12 col-md-4 form-group cvc required'>
+							<label class='control-label'>CVC</label> <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+						</div>
+						<div class='col-xs-12 col-md-4 form-group expiration required'>
+							<label class='control-label'>Expiration Month</label> <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+						</div>
+						<div class='col-xs-12 col-md-4 form-group expiration required'>
+							<label class='control-label'>Expiration Year</label> <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
+						</div>
+					</div>
+
+					<div class='form-row row'>
+						<div class='col-md-12 error form-group hide'>
+							<div class='alert-danger alert'>Please correct the errors and try
+								again.</div>
+						</div>
+					</div>
+
+					<div class="row ">
+						<div class="col-lg-12">
+							<div class="text-center">
+								<button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($<span id="stripe_price_submit"><?= $gigs->price ?></span>)</button>
+							</div>
+						</div>
+					</div>
+
+				</form>
+
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- <script>
+	function goCoinbase(uid, gigid) {
+		// window.location.href = 'https://www.coinbase.com/oauth/authorize?client_id=c3a138e8c1f60537e8f1d458e649d340af6879651fb75f03db2a79e718f629be&redirect_uri=https%3A%2F%2Fameygraphics.com%2FGigs%2Fcallback&response_type=code&scope=wallet%3Auser%3Aread&uid=' + uid + '&gigid=' + gigid;
+		window.location.href = 'https://www.coinbase.com/oauth/authorize?client_id=e0da755b6e1acf3cb54e397f30bf9cb1fed7b891c1f5622d6ca4633d5be1e93a&redirect_uri=https%3A%2F%2Fwww.localhost%2Fuk_feedback%2F&response_type=code&scope=wallet%3Auser%3Aread&uid=' + uid + '&gigid=' + gigid;
+	}
+</script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<script type="text/javascript">
+	$(function() {
+		var $form = $(".require-validation");
+		$('form.require-validation').bind('submit', function(e) {
+			var $form = $(".require-validation"),
+				inputSelector = ['input[type=email]', 'input[type=password]',
+					'input[type=text]', 'input[type=file]',
+					'textarea'
+				].join(', '),
+				$inputs = $form.find('.required').find(inputSelector),
+				$errorMessage = $form.find('div.error'),
+				valid = true;
+			$errorMessage.addClass('hide');
+
+			$('.has-error').removeClass('has-error');
+			$inputs.each(function(i, el) {
+				var $input = $(el);
+				if ($input.val() === '') {
+					$input.parent().addClass('has-error');
+					$errorMessage.removeClass('hide');
+					e.preventDefault();
+				}
+			});
+
+			if (!$form.data('cc-on-file')) {
+				e.preventDefault();
+				Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+				Stripe.createToken({
+					number: $('.card-number').val(),
+					cvc: $('.card-cvc').val(),
+					exp_month: $('.card-expiry-month').val(),
+					exp_year: $('.card-expiry-year').val()
+				}, stripeResponseHandler);
+			}
+
+		});
+
+		function stripeResponseHandler(status, response) {
+			if (response.error) {
+				$('.error')
+					.removeClass('hide')
+					.find('.alert')
+					.text(response.error.message);
+			} else {
+				var token = response['id'];
+				$form.find('input[type=text]').empty();
+				$form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+				$form.get(0).submit();
+			}
+		}
+
+	});
+</script>
 <!-- offer Detail wrapper End -->

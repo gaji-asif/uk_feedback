@@ -303,13 +303,13 @@
 										</button>
 									</div>
 									<?php } ?>
-							<?php if($this->session->flashdata('danger2')){ ?>
- 									<div class="alert alert-danger mb-3 background-danger" role="alert">
-									 <?php echo $this->session->flashdata('danger2'); ?>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
+									<?php if($this->session->flashdata('danger2')){ ?>
+										<div class="alert alert-danger mb-3 background-danger" role="alert">
+										<?php echo $this->session->flashdata('danger2'); ?>
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
 									<?php } ?>
 								<form  method="POST" action="<?=base_url()?>front/addReview" enctype="multipart/form-data" name="addReviewForm">
 								<input type="hidden" name="gig_id" value="<?php echo $gig_id; ?>">
@@ -333,11 +333,11 @@
 											<label for="exampleInputEmail1">Review</label>
 											<textarea class="form-control" name="rating[]" aria-label="With textarea" rows="5" required></textarea>
 										</div>       
-                                        <div class="float-right">
-                                            <button class="btn btn-success ml-1 mb-1" type="button"><i class="fa fa-plus"></i></button>
-                                        </div>                                              
+                                                                                     
                                     </div>
-                                
+									<div class="float-right">
+                                            <button class="btn btn-success ml-1 mb-1" type="button"><i class="fa fa-plus"></i></button>
+                                        </div>
 
 									<div class="clone d-none">
 										<div class="hide new" style="padding-top:30px">
@@ -381,7 +381,7 @@
     $(document).ready(function() {
         $(".btn-success").click(function(){ 
           var html = $(".clone").html();
-          $(".increment").after(html);
+          $(".increment").append(html);
       });
  
       $("body").on("click",".btn-danger",function(){ 

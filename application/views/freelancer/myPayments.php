@@ -64,6 +64,14 @@
 
 <div class="sc_wrapper my_payments_page pad_top_bottom_50 bg_gray">
 	<div class="container">
+	<?php if($this->session->flashdata('success')){ ?>
+											<div class="alert alert-success mb-3 background-success" role="alert">
+											<?php echo $this->session->flashdata('success'); ?>
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+										<?php } ?>
 		<div class="">
 			<a type="button" class="admin_btn text-white mb-2" data-toggle="modal" data-target="#exampleModal">Withdraw</a>
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -77,18 +85,35 @@
 							</button>
 						</div>
 						<div class="modal-body">
-						
+					
+						<?php if(isset($totalAmount) && $totalAmount>10){?>
+								<div class="form-group">
+									<label for="exampleInputEmail11">Paypal Email</label>
+									<input type="email" name="paypal_email" class="form-control" id="exampleInputEmail11" required>
+								</div>
 								<div class="form-group">
 									<label for="exampleInputEmail1">Withdraw Amount</label>
 									<input type="number" name="request_amount" class="form-control" id="exampleInputEmail1" min='0.1' step="0.1" max="<?php if(isset($totalAmount)) echo $totalAmount; ?>" placeholder="Enter Withdraw Amount" required>
+									<small id="exampleInputEmail1" class="form-text text-danger">Minimum withdraw amount $10.</small>
 								</div>
+								
 							<input type="hidden" name="available_amount" value="<?php if(isset($totalAmount)) echo $totalAmount; ?>">
+						<?php }else{?>
+							<div class="alert alert-danger mb-3 background-danger" role="alert">
+								<div class="text-center">
+									Your wallet amount is less then $10.
+								</div>
+							</div>
+						<?php }?>
 
-							
 						</div>
 						<div class="modal-footer">
+						<?php if(isset($totalAmount) && $totalAmount>10){?>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
 							<button type="submit" class="admin_btn">Yes</button>
+						<?php }else{?>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<?php }?>
 						</div>
 						</form>
 					</div>
