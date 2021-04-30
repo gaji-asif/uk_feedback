@@ -100,7 +100,7 @@
 			<div class="bg-white py-2 collapse-inner rounded">
 
 				<a class="collapse-item" href="<?= base_url('admin/paypalSettings'); ?>">Paypal</a>
-				<a class="collapse-item" href="#">Coinbase</a>
+				<!-- <a class="collapse-item" href="#">Coinbase</a> -->
 			</div>
 		</div>
 	</li>
