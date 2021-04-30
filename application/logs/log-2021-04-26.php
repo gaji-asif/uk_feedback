@@ -16,3 +16,18 @@ ERROR - 2021-04-26 12:00:31 --> Severity: error --> Exception: syntax error, une
 ERROR - 2021-04-26 12:00:47 --> Severity: error --> Exception: syntax error, unexpected '}' C:\xampp\htdocs\uk_feedback\application\controllers\Front.php 538
 ERROR - 2021-04-26 12:25:48 --> 404 Page Not Found: GigsDetail/14
 ERROR - 2021-04-26 12:25:57 --> 404 Page Not Found: GigsDetail/14
+ERROR - 2021-04-26 16:17:01 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:17:01 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:17:01 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:17:10 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:17:10 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:17:10 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:18:02 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:18:02 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:18:02 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:18:04 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:18:04 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:18:04 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:18:05 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:18:05 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
+ERROR - 2021-04-26 16:18:05 --> Severity: Notice --> Undefined index: paypal_email C:\xampp_28_02\htdocs\uk_feedback\application\views\admin\payment-request.php 51
