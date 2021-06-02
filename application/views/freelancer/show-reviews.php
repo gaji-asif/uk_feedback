@@ -92,7 +92,7 @@
 			<!-- contents Start -->
 			<div class="dash_content_cover">
 				<div class="dash_content_area">
-				<?php include 'tabs-menu.php';?>
+					<?php include 'tabs-menu.php';?>
 
 
 					<?php if (isset($id)) { ?>
@@ -113,7 +113,7 @@
 									<div class="card-body">
 										<?php if($this->session->flashdata('danger')){ ?>
 											<div class="alert alert-danger mb-3 background-danger" role="alert">
-											<?php echo $this->session->flashdata('danger'); ?>
+												<?php echo $this->session->flashdata('danger'); ?>
 												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
@@ -121,7 +121,7 @@
 										<?php } ?>
 										<?php if($this->session->flashdata('success')){ ?>
 											<div class="alert alert-success mb-3 background-success" role="alert">
-											<?php echo $this->session->flashdata('success'); ?>
+												<?php echo $this->session->flashdata('success'); ?>
 												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
@@ -164,7 +164,7 @@
 																				<div class="modal-body">
 																					<div class="form_group pb-1">
 																						<label class="form_label">Link:</label><br>
-																						<a href="<?php echo $review['link_url']; ?>"><strong><?php echo $review['link_url']; ?></strong></a>
+																						<a style="text-decoration: underline;" href="<?php echo $review['link_url']; ?>" target="_blank"><strong><?php echo $review['link_url']; ?></strong></a>
 																						
 																						<!-- <div class="input_group">
 																							<input type="text" class="form-control" value="" >
@@ -173,10 +173,10 @@
 																					<div class="form_group pb-1">
 																						<label class="form_label">Review:</label><br>
 																						<label class="form_label"><strong><?php echo $review['review_details']; ?></strong></label>
-																				
+
 																					</div>
 																					<div class="form_group pb-1">
-																						<label class="form_label">Reviewer Name</label>
+																						<label class="form_label"> Enter your email Reviewer name</label>
 																						<div class="input_group">
 																							<input type="text" class="form-control" name="reviewer_name" required >
 																						</div>
@@ -205,9 +205,9 @@
 															</td>
 														</tr>
 														
-													<?php
-												break;
-												} ?>
+														<?php
+														break;
+													} ?>
 												</tbody>
 											</table>
 										</div>

@@ -47,9 +47,10 @@
 							</div>
 							<?php 
 							$str=substr($this->session->userdata('username'), 0, strrpos($this->session->userdata('username'), ' '));
+							$signup = 'signup?user_id='.$this->session->userdata('userid');
 							?>
 							<div class="input_box">
-								<input type="text" class="affl_input" id="copy_af_input" value="<?php echo base_url().$str.$this->session->userdata('userid')?>" name="affiliate_link">
+								<input type="text" class="affl_input" id="copy_af_input" value="<?php echo base_url().$signup?>" name="affiliate_link">
 								<span class="copy_btn" onclick="copyfunction()">Copy</span>
 							</div>
 						</div>

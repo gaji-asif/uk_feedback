@@ -51,7 +51,7 @@
 							<div class="header_right hdr_buttons">
 								<span class="h_search_icon icon"><i class="fa fa-search"></i></span>
 								<a href="<?= base_url() ?>login" class="hdr_button green_button"><i class="fas fa-user-lock"></i><span class="text">Login</span></a>
-								<a href="<?= base_url() ?>signup" class="hdr_button black_button"><i class="fas fa-sign-in-alt"></i><span class="text">Signup</span></a>
+								<a href="<?= base_url() ?>signup?user_id=0" class="hdr_button black_button"><i class="fas fa-sign-in-alt"></i><span class="text">Signup</span></a>
 							</div>
 						</div>
 					</div>
@@ -108,9 +108,18 @@
 										<div class="usr_name">
 											<div class="user_name">
 												<div class="u_title">Hello <?= $this->session->userdata('username') ?><i class="fas fa-chevron-down"></i></div>
-												<span class="user_amount"><?= $this->Common_model->fetch_wallet_by_id($this->session->userdata('userid')) ?> USD</span>
+												<span class="user_amount">
+
+													<?php
+													$users_data = $this->Common_model->fetch_wallet_by_id_new($this->session->userdata('userid'));
+
+													echo $users_data['users_wallet']+($users_data['users_refferal_count']*10); 
+												
+													?> USD
+
+												</span>
 												<?php if ($this->Common_model->fetch_wallet_by_id($this->session->userdata('userid')) >= 10 && $this->session->userdata('user_type') == 1) { ?>
-													<a href="<?= base_url() ?>freelancer/withdrawal" class="withdraw_btn"><i class="fas fa-money-check-alt"></i><span class="txt">Withdraw</span></a>
+													<a href="<?= base_url() ?>freelancer/my-payments" class="withdraw_btn"><i class="fas fa-money-check-alt"></i><span class="txt">Withdraw</span></a>
 												<?php } ?>
 											</div>
 										</div>
@@ -187,7 +196,14 @@
 								<?php
 								if ($this->session->userdata('userid')) { ?>
 									<li><a href="<?= base_url() ?>affiliates">Become an Affiliate</a></li>
+
+									<?php if($this->session->userdata('user_type') == 2){ ?>
+
 									<li><a href="<?= base_url() ?>offers/1">Our Offers</a></li>
+									
+									<?php }?>
+									
+
 								<?php
 								}
 								?>

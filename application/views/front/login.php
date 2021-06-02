@@ -1,4 +1,5 @@
 <!-- Login section End -->
+<script src='https://www.google.com/recaptcha/api.js' async defer ></script>
 <div class="sc_wrapper sc_login_sign_section pad_top_bottom_40">
 	<div class="container">
 		<div class="row h_center">
@@ -17,6 +18,7 @@
 					<?php } ?>
 					<div class="login_form">
 						<form action="<?= base_url() ?>login" method="POST" name="login">
+							 
 							<div class="form_group">
 								<label class="input_label">Email</label>
 								<input type="email" name="email" class="input" placeholder="Enter Your Email">
@@ -25,6 +27,8 @@
 								<label class="input_label">Password</label>
 								<input type="password" name="password" class="input" placeholder="Enter Your Password">
 							</div>
+
+							<div class="g-recaptcha" data-sitekey="6Ld-KvEaAAAAALft9RFf64TtJ7Z-oY8pSW9u44Zr"></div>
 							<div class="form_group remember_row">
 								<!--<div class="check_box">-->
 								<!--  <label>-->
@@ -33,7 +37,7 @@
 								<!--	<span class="c_text">Remember</span>-->
 								<!--  </label>-->
 								<!--</div>-->
-								<a href="#" class="forget_lnk">Forget My Password</a>
+								<!-- <a href="#" class="forget_lnk">Forget My Password</a> -->
 							</div>
 							<div class="button_group">
 								<input type="submit" class="login_btn green_button" name="submit" value="Login">

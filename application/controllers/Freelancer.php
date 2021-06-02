@@ -242,6 +242,10 @@ class Freelancer extends CI_Controller {
 	    $data['title'] = '';
 	    $data['description'] = '';
 	    $data['keyword'] = '';
+	    $this->db->where('referral_code',$this->session->userdata('userid'));
+        $query=$this->db->get('users');
+        $data['all_referalls'] = $query->result();
+
 	    $this->load->view('header',$data);
 	    $this->load->view('freelancer/myReferrals',$data);
 		$this->load->view('footer');

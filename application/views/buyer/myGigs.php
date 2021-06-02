@@ -40,7 +40,7 @@
 							<div class="prices"><span class="spn_1">price</span><span class="spn_2">$<?=$mg->amount?></span></div>
 							<div class="date_time"><i class="fas fa-clock"></i><?=$this->Common_model->convert_date('d-m-Y h:i:a',$mg->created_on);?></div>
 							<div class="info_txt status"><span class="span_1">status</span><span class="span_2"><?php if($mg->status==1){ echo "completed"; } else { echo "running"; } ?></span></div>
-							<div class="info_txt payment"><span class="span_1">Payment By</span><span class="span_2"><?php if($mg->payment_by==1){ echo "Paypal"; } else { echo "coinbase"; } ?></span></div>
+							<div class="info_txt payment"><span class="span_1">Payment By</span><span class="span_2"><?php if($mg->payment_by==1){ echo "Paypal"; } else { echo "Card"; } ?></span></div>
 						</div>
 					</div>
 				</div>

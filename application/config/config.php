@@ -528,5 +528,9 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-$config['stripe_key'] = 'pk_test_QXkB6Jjve2Q0BDE5PRiKEG0K004PyqAuPu';
-$config['stripe_secret'] = 'sk_test_CdAzjUeRIF13nsMSm2m3nk1b0046F2lEfg';
+// these are for  local test
+// $config['stripe_key'] = 'pk_test_QXkB6Jjve2Q0BDE5PRiKEG0K004PyqAuPu';
+// $config['stripe_secret'] = 'sk_test_CdAzjUeRIF13nsMSm2m3nk1b0046F2lEfg';
+
+$config['stripe_key'] = 'pk_test_51IkvM3JX4hMN0AiPWPIy0HFlaBJNJn6uwag3oSc8L4vwKjrxWFYlsvhm3C4xbSJkNbYqzxdocc1cit6FAkw5FqDN00cq1kXPyV';
+$config['stripe_secret'] = 'sk_test_51IkvM3JX4hMN0AiPclorhtp4DYa56HwTQVtsY4tTrK9GXdjMzpOHTNPhpsgV1nDXtUfDRp0w7EvcbbMSGjcQmDWC00gh2t4ExK';

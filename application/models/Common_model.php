@@ -279,6 +279,43 @@ class Common_model extends CI_Model
         return $row_details->wallet;
     }
 
+    function fetch_wallet_by_id_new($id)
+    {
+
+        $array = array('user_id' => $id);
+        $row_details = $this->db->get_where('users', $array)->row();
+        //$users_referral_code = $row_details->referral_code;
+
+        $users_wallet = $row_details->wallet;
+
+        $this->db->where('referral_code',$id);
+        $query=$this->db->get('users');
+        $all_referalls=$query->result();
+
+        // echo "<pre>";
+        // print_r($all_referalls);
+        // exit;
+        $users_100_plus_income = array();
+        if(isset($all_referalls)){
+             foreach($all_referalls as $all_referall){
+                if($all_referall->wallet > 100  || $all_referall->wallet == 100 ){
+                    $users_100_plus_income[] = $all_referall->referral_code;
+                }
+
+            }
+        }
+
+       $users_refferal_count = count($users_100_plus_income);
+
+       return array(
+        'users_wallet' => $users_wallet,
+        'users_refferal_count' => $users_refferal_count
+        );
+
+      
+
+     }
+
 
 
 

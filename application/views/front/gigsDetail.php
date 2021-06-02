@@ -473,6 +473,8 @@
 								<input type='hidden' name='cancel_return' value='http://ameygraphics.com/Gigs/front/cancel'>
 								<input type='hidden' name='return' value='http://ameygraphics.com/Gigs/front/return'>
 								<input type="hidden" name="cmd" value="_xclick">
+								
+
 								<input type="submit" name="pay_now" id="pay_now" Value="Pay With Paypal" class="buy_button black_button" style="margin-top:10px;">
 							</form>
 

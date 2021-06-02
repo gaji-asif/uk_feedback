@@ -25,6 +25,7 @@
 								<div class="col-md-6 col-12">
 									<div class="form_group">
 										<input type="text" name="fname" placeholder="First Name">
+										<input type="hidden" value="<?php echo $referral_user?>" name="referral_user" placeholder="First Name">
 									</div>
 								</div>
 								<div class="col-md-6 col-12">
@@ -50,7 +51,7 @@
                                             $query = $this->db->query($sql);
                                             if ($query->num_rows() > 0) {
                                             foreach ($query->result() as $row) {?>
-                                            <option value="<?php echo $row->countries_iso_code;?>"><?php echo $row->countries_name;?></option>
+                                            <option value="<?php echo $row->countries_name;?>"><?php echo $row->countries_name;?></option>
                                             <?php }
                                             }
                                             ?>
@@ -74,7 +75,7 @@
 							<div class="form_group remember_row">
 								<div class="check_box">
 								  <label>
-									<input type="checkbox" name="accept">
+									<input type="checkbox" name="accept" required="required" checked="checked">
 									<span class="c_box"></span>
 									<span class="c_text">I accept the <a href="#">Terms &amp; Conditions</a> of the website</span>
 								  </label>

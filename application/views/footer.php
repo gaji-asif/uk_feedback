@@ -62,7 +62,7 @@
 		<div class="row">
 			<div class="col-lg-12 col-12">
 				<div class="copyright_text text-center">
-					<p>Copyright 2021 @ Gigs All Rights Reserved. Developed by <a href="https://oxysquad.com/">oxysquad technologies</a></p>
+					<p>Copyright 2021 @ All Rights Reserved</p>
 				</div>
 			</div>
 		</div>

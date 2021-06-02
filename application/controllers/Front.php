@@ -1,12 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
 class Front extends CI_Controller
-{
-
-	public function __construct()
+{public function __construct()
 	{
-		//call CodeIgniter's default Constructor
+	//call CodeIgniter's default Constructor
 		parent::__construct();
 		//load database libray manually
 		date_default_timezone_set('Asia/Kolkata');
@@ -59,6 +56,9 @@ class Front extends CI_Controller
 		$this->load->view('front/gigsDetail', $data);
 		$this->load->view('footer');
 	}
+
+	
+
 	public function WorkStram($id)
 	{
 		$data['title'] = '';
@@ -253,39 +253,62 @@ class Front extends CI_Controller
 		$data['description'] = '';
 		$data['keyword'] = '';
 		$this->load->view('header', $data);
-		 if($_POST){
+		if($_POST){
 
-		$email = $this->input->post('email');
-		$password = $this->input->post('password');
+		if(!empty($_POST['g-recaptcha-response']))
+		  {
+		        $secret = '6Ld-KvEaAAAAAEUm3V7CdQ9GpNny_XKfAwpXb-yO';
+		        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+		        $responseData = json_decode($verifyResponse);
+		        
 
-		$data2['check_login'] = $this->Common_model->userLogin($email, $password);
-		// $data2['check_login'] = $this->Common_model->userLogin('asif@gmail.com', '123456');
-		if ($data2['check_login'] != false) {
+		        if($responseData->success){
+		        	$email = $this->input->post('email');
+					$password = $this->input->post('password');
 
-			$this->session->set_userdata(array("username" => $data2['check_login']->name, "userid" => $data2['check_login']->user_id, "useremail" => $data2['check_login']->email, "user_type" => $data2['check_login']->user_type));
+					$data2['check_login'] = $this->Common_model->userLogin($email, $password);
+					// $data2['check_login'] = $this->Common_model->userLogin('asif@gmail.com', '123456');
+					if ($data2['check_login'] != false) {
 
-			$this->session->set_flashdata('success', 'Login successfully.');
-			if ($data2['check_login']->user_type == 1) {
-				redirect('freelancer/dashboard');
-			} else {
-				// redirect('buyer/dashboard');
-				redirect('buyer/my-gigs');
-			}
-		} else {
-			$this->session->set_flashdata('error', 'invalid credentials');
-		}
+						$this->session->set_userdata(array("username" => $data2['check_login']->name, "userid" => $data2['check_login']->user_id, "useremail" => $data2['check_login']->email, "user_type" => $data2['check_login']->user_type));
+
+						$this->session->set_flashdata('success', 'Login successfully.');
+						if ($data2['check_login']->user_type == 1) {
+							redirect('freelancer/dashboard');
+						} else {
+							// redirect('buyer/dashboard');
+							redirect('buyer/my-gigs');
+						}
+					} else {
+						$this->session->set_flashdata('error', 'invalid credentials');
+					}
+		        }
+		        else{
+		        	$this->session->set_flashdata('error', 'invalid recaptcha');
+		        }
+
+
+		   }
+
+		
 		 }
 		$this->load->view('front/login', $data);
 		$this->load->view('footer');
 	}
 
 	public function register()
-	{
+	{  error_reporting(E_ALL);
+       ini_set("display_errors", 1);
+		$user_idd = $_GET['user_id'];
+		
+		//echo $user_idds; exit;
+	
 		$data['title'] = '';
 		$data['description'] = '';
 		$data['keyword'] = '';
+		$data['referral_user'] = $user_idd;
 		$this->load->view('header', $data);
-		if ($_POST) {
+		if ($this->input->post('email')) {
 
 			$data1['name'] = $this->input->post('fname') . ' ' . $this->input->post('lname');
 			$data1['email'] = $this->input->post('email');
@@ -294,6 +317,7 @@ class Front extends CI_Controller
 			$data1['country'] = $this->input->post('country');
 			$data1['gender'] = $this->input->post('gender');
 			$data1['user_type'] = $this->input->post('user_type');
+			$data1['referral_code'] = $this->input->post('referral_user');
 
 			$data1['register_date'] = date('Y-m-d');
 			$data1['active'] = 1;
@@ -301,7 +325,9 @@ class Front extends CI_Controller
 			$insert = $this->Common_model->insert_detail($data1, 'users');
 			if ($insert) {
 				$str = substr($this->input->post('fname'), 0, strrpos($this->input->post('fname'), ' '));
-				$data2['referral_code'] = $str . $insert;
+				//$data2['referral_code'] = $str . $insert;
+
+				 
 
 				$this->session->set_userdata(array("username" => $data1['name'], "userid" => $insert, "useremail" => $data1['email'], "user_type" => $data1['user_type']));
 
@@ -543,6 +569,9 @@ class Front extends CI_Controller
 			$data['payment_status'] = 1;
 			$data['date'] = date('Y-m-d');
 			$data['created_on'] = date('Y-m-d H:i:s');
+
+			
+			
 
 			$inserData = $this->Common_model->insert_detail($data, 'buyer_gigs');
 			if(!empty($inserData))
